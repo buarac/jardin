@@ -18,10 +18,16 @@ export default function AppLayout({
   showBack = false,
 }: AppLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <TopBar title={title} version={version} showBack={showBack} />
-      <main className="flex-grow bg-white p-4">{children}</main>
-      <BottomNavBar />
+    <div className="relative h-[100dvh] overflow-hidden">
+      <div className="fixed top-0 left-0 right-0 z-10">
+        <TopBar title={title} version={version} showBack={showBack} />
+      </div>
+      <main className="absolute top-[64px] bottom-[64px] left-0 right-0 overflow-y-auto bg-white p-4">
+        {children}
+      </main>
+      <div className="fixed bottom-0 left-0 right-0 z-10">
+        <BottomNavBar />
+      </div>
     </div>
   );
 }
