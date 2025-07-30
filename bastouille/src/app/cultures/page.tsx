@@ -24,12 +24,14 @@ export default function CulturePage() {
         >
           <ul className="space-y-2">
             {cultures.map((culture) => (
-              <li key={culture.id} className="flex items-center gap-4 bg-green-100 p-3 rounded shadow">
-                <img
-                  src={`/cultures/${culture.img.replace(".png", "")}.png`}
-                  alt={culture.nom}
-                  className="w-16 h-16 object-contain"
-                />
+              <li key={culture.id} className="flex items-center gap-4 p-3">
+                <div className="m-4">
+                  <img
+                    src={`/cultures/${culture.img}`}
+                    alt={culture.nom}
+                    className="w-16 h-16 object-contain"
+                  />
+                </div>
                 <div>
                   <p className="font-semibold">{culture.nom}</p>
                   <p className="text-sm text-gray-600">{culture.categorie}</p>
