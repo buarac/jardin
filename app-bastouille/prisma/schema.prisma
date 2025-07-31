@@ -1,0 +1,47 @@
+// This Prisma schema defines the data model for the Baštouille application.
+// To apply changes to your database run `npx prisma migrate dev` after setting
+// the DATABASE_URL environment variable in a `.env` file.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model culture {
+  id          String      @id @default(uuid())
+  nom         String
+  img         String?
+  categorie   categorie   @default(legume)
+  mode_recolte moderecolte @default(poids)
+  recoltes    recolte[]
+}
+
+model recolte {
+  id          Int       @id @default(autoincrement())
+  culture     culture   @relation(fields: [id_culture], references: [id])
+  id_culture  String
+  date        DateTime
+  poids       Int
+  quantite    Int?
+  temperature Float?
+  humidite    Float?
+  vent        Float?
+  indice_uv   Float?
+  qte_pluie   Float?
+}
+
+enum categorie {
+  fruit
+  legume
+  aromatique
+  fleur
+}
+
+enum moderecolte {
+  poids
+  poids_unite
+}

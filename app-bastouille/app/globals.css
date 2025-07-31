@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default color variables used by Tailwind classes via skin namespace. */
+:root {
+  --color-base: #ffffff;
+  --color-fill: #f9f9f9;
+  --color-text: #222222;
+  --color-accent: #0070f3;
+  --color-muted: #e5e5e5;
+  --color-card: #ffffff;
+}
+
+/* Soleil du Sud theme */
+html[data-theme='soleil'][data-mode='light'] {
+  --color-base: #fef9ef;
+  --color-fill: #fff6e8;
+  --color-text: #2f2f1e;
+  --color-accent: #f3a712;
+  --color-muted: #e5d5b0;
+  --color-card: #ffffff;
+}
+html[data-theme='soleil'][data-mode='dark'] {
+  --color-base: #1f1a12;
+  --color-fill: #2a251c;
+  --color-text: #f5eedb;
+  --color-accent: #e3a42e;
+  --color-muted: #83725a;
+  --color-card: #2d281f;
+}
+
+/* Lavande et Romarin theme */
+html[data-theme='lavande'][data-mode='light'] {
+  --color-base: #f9f7fc;
+  --color-fill: #f0ebf8;
+  --color-text: #2b223a;
+  --color-accent: #a485c7;
+  --color-muted: #d9cee8;
+  --color-card: #ffffff;
+}
+html[data-theme='lavande'][data-mode='dark'] {
+  --color-base: #201c2b;
+  --color-fill: #2c2740;
+  --color-text: #ebe3f7;
+  --color-accent: #b998d3;
+  --color-muted: #6d5a82;
+  --color-card: #2f2944;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-text);
+}
