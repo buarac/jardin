@@ -23,6 +23,7 @@
 # Env files (sécurité)
 **/.env
 **/.env.*
+!.env.example
 
 # VSCode (si vous ne voulez pas versionner les paramètres de l'éditeur)
 .vscode/
