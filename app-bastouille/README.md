@@ -94,3 +94,4 @@ ou déployez l’application sur une plateforme compatible avec Next.js (Vercel,
 ## Licence
 
 Ce projet est fourni à titre d’exemple pour illustrer la création d’une application web complète avec Next.js, Prisma et Tailwind. Adaptez et améliorez le selon vos besoins !
+<ChartLine color="#669c35" />
