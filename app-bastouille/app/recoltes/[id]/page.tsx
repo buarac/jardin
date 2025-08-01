@@ -1,5 +1,5 @@
-import { Header } from "../../components/Header";
-import { RecolteEditForm } from "../../components/RecolteEditForm";
+import { Header } from "@/components/Header";
+import { RecolteEditForm } from "@/components/RecolteEditForm";
 
 interface Culture {
   id: string;

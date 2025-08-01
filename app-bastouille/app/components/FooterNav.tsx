@@ -19,7 +19,7 @@ export const FooterNav: React.FC = () => {
   const inactiveClasses = "text-skin-text/70";
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-10 border-t border-skin-muted bg-skin-card flex md:justify-around">
+    <nav className="fixed bottom-0 inset-x-0 z-10 border-t border-skin-muted bg-skin-card flex md:justify-around h-20">
       {/* Home always visible */}
       <Link href="/" className={`${baseClasses} ${isActive("/") ? activeClasses : inactiveClasses}`}> 
         {/* Home icon */}

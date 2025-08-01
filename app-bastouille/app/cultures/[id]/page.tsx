@@ -1,5 +1,5 @@
-import { Header } from "../../components/Header";
-import { CultureDetails } from "../../components/CultureDetails";
+import { Header } from "@/components/Header";
+import { CultureDetails } from "@/components/CultureDetails";
 
 interface CultureResponse {
   id: string;

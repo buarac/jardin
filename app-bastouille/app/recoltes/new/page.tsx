@@ -1,9 +1,28 @@
 "use client";
 
-import { Header } from "../../components/Header";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Header } from "@/components/Header";
+import {
+  Sun,
+  Cloud,
+  CloudRain,
+  CloudSnow,
+  CloudLightning,
+  CloudFog,
+  Wind,
+  Thermometer,
+  Droplet,
+  // add other icons as needed
+} from "lucide-react";
+import WeatherCodeToLabel, { WeatherCode } from "@/components/WeatherCodeToLabel";
 
 interface CultureItem {
   id: string;
@@ -25,19 +44,23 @@ export default function NewRecoltePage() {
     const tzOff = now.getTimezoneOffset() * 60000;
     return new Date(now.getTime() - tzOff).toISOString().slice(0, 16);
   });
-  const [temperature, setTemperature] = useState('');
-  const [humidite, setHumidite] = useState('');
-  const [vent, setVent] = useState('');
-  const [indiceUv, setIndiceUv] = useState('');
-  const [qtePluie, setQtePluie] = useState('');
+  const [temperature, setTemperature] = useState<number | null>(null);
+  const [humidite, setHumidite] = useState<number | null>(null);
+  const [vent, setVent] = useState<number | null>(null);
+  const [indiceUv, setIndiceUv] = useState<number | null>(null);
+  const [qtePluie, setQtePluie] = useState<number | null>(null);
+  const [weatherCode, setWeatherCode] = useState<WeatherCode | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingWeather, setLoadingWeather] = useState(false);
 
   useEffect(() => {
     fetch('/api/cultures')
       .then((res) => res.json())
       .then((data: any[]) => {
-        const simplified = data.map((c) => ({ id: c.id, nom: c.nom, img: c.img, mode_recolte: c.mode_recolte }));
+        const simplified = data
+          .map((c) => ({ id: c.id, nom: c.nom, img: c.img, mode_recolte: c.mode_recolte }))
+          .sort((a, b) => a.nom.localeCompare(b.nom));
         setCultures(simplified);
         if (presetCultureId) {
           setCultureId(presetCultureId);
@@ -49,6 +72,35 @@ export default function NewRecoltePage() {
   }, [presetCultureId]);
 
   const selectedCulture = cultures.find((c) => c.id === cultureId);
+
+  useEffect(() => {
+    fetchWeather();
+  }, []);
+
+  const fetchWeather = async () => {
+    setLoadingWeather(true);
+    setMessage(null);
+    try {
+      const res = await fetch('/api/meteo');
+      if (!res.ok) {
+        setMessage("Erreur lors de la récupération de la météo");
+        setLoadingWeather(false);
+        return;
+      }
+      const data = await res.json();
+      setTemperature(data.temperature ?? null);
+      setHumidite(data.humidite ?? null);
+      setVent(data.vent ?? null);
+      setIndiceUv(data.indice_uv ?? null);
+      setQtePluie(data.qte_pluie ?? null);
+      setWeatherCode((data.weather_code as WeatherCode) ?? null);
+    } catch (error) {
+      console.error(error);
+      setMessage("Erreur inattendue lors de la récupération de la météo");
+    } finally {
+      setLoadingWeather(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,11 +119,11 @@ export default function NewRecoltePage() {
       if (selectedCulture?.mode_recolte === 'poids_unite' && quantite) {
         payload.quantite = parseInt(quantite);
       }
-      if (temperature) payload.temperature = parseFloat(temperature);
-      if (humidite) payload.humidite = parseFloat(humidite);
-      if (vent) payload.vent = parseFloat(vent);
-      if (indiceUv) payload.indice_uv = parseFloat(indiceUv);
-      if (qtePluie) payload.qte_pluie = parseFloat(qtePluie);
+      if (temperature !== null) payload.temperature = temperature;
+      if (humidite !== null) payload.humidite = humidite;
+      if (vent !== null) payload.vent = vent;
+      if (indiceUv !== null) payload.indice_uv = indiceUv;
+      if (qtePluie !== null) payload.qte_pluie = qtePluie;
       const res = await fetch('/api/recoltes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -84,11 +136,12 @@ export default function NewRecoltePage() {
         // reset fields
         setPoids('');
         setQuantite('');
-        setTemperature('');
-        setHumidite('');
-        setVent('');
-        setIndiceUv('');
-        setQtePluie('');
+        setTemperature(null);
+        setHumidite(null);
+        setVent(null);
+        setIndiceUv(null);
+        setQtePluie(null);
+        setWeatherCode(null);
         // Optionally redirect back to home or recoltes page
         router.push('/');
       }
@@ -102,22 +155,32 @@ export default function NewRecoltePage() {
 
   return (
     <div className="flex flex-col min-h-full">
-      <Header title="Ajouter une récolte" backHref="/" />
+      <Header title="Nouvelle récolte" backHref="/" />
       <form onSubmit={handleSubmit} className="p-4 space-y-4">
         {/* Culture selection */}
         <div>
           <label className="block text-sm font-medium mb-1">Culture</label>
-          <select
-            value={cultureId}
-            onChange={(e) => setCultureId(e.target.value)}
-            className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-          >
-            {cultures.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.nom}
-              </option>
-            ))}
-          </select>
+          <Select onValueChange={(val) => setCultureId(val)} defaultValue={cultureId}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Choisir une culture" />
+            </SelectTrigger>
+            <SelectContent>
+              {cultures.map((c) => (
+                <SelectItem key={c.id} value={c.id}>
+                  <div className="flex items-center gap-2">
+                    {c.img && (
+                      <img
+                        src={`/images/cultures/${c.img}`}
+                        alt={c.nom}
+                        className="w-6 h-6 object-contain"
+                      />
+                    )}
+                    <span>{c.nom}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         {/* Poids */}
         <div>
@@ -147,61 +210,56 @@ export default function NewRecoltePage() {
         {/* Date/time */}
         <div>
           <label className="block text-sm font-medium mb-1">Date et heure</label>
-          <input
-            type="datetime-local"
-            value={dateTime}
-            onChange={(e) => setDateTime(e.target.value)}
-            className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-          />
+          <span className="block w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text/70">
+            {new Date(dateTime).toLocaleString('fr-FR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </span>
         </div>
-        {/* Weather fields */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Température (°C)</label>
-            <input
-              type="number"
-              value={temperature}
-              onChange={(e) => setTemperature(e.target.value)}
-              className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-            />
+        {/* Weather display if present */}
+        {(temperature !== null || humidite !== null || vent !== null || indiceUv !== null || qtePluie !== null || weatherCode !== null) && (
+          <div className="p-4 rounded-md border border-skin-muted bg-skin-fill/50 grid grid-cols-3 sm:grid-cols-6 gap-4 text-center">
+            {weatherCode !== null && (
+              <div className="flex flex-col items-center justify-center">
+                <WeatherCodeToLabel code={weatherCode as WeatherCode} large={true} hideText={true} />
+              </div>
+            )}
+            {temperature !== null && (
+              <div className="flex flex-col items-center justify-center">
+                <Thermometer className="w-6 h-6" />
+                <span className="text-sm">{temperature.toFixed(1)}°C</span>
+              </div>
+            )}
+            {humidite !== null && (
+              <div className="flex flex-col items-center justify-center">
+                <Droplet className="w-6 h-6" />
+                <span className="text-sm">{humidite.toFixed(0)}%</span>
+              </div>
+            )}
+            {vent !== null && (
+              <div className="flex flex-col items-center justify-center">
+                <Wind className="w-6 h-6" />
+                <span className="text-sm">{vent.toFixed(1)} km/h</span>
+              </div>
+            )}
+            {indiceUv !== null && (
+              <div className="flex flex-col items-center justify-center">
+                <Sun className="w-6 h-6" />
+                <span className="text-sm">{indiceUv.toFixed(0)}</span>
+              </div>
+            )}
+            {qtePluie !== null && (
+              <div className="flex flex-col items-center justify-center">
+                <CloudRain className="w-6 h-6" />
+                <span className="text-sm">{qtePluie.toFixed(1)} mm</span>
+              </div>
+            )}
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Humidité (%)</label>
-            <input
-              type="number"
-              value={humidite}
-              onChange={(e) => setHumidite(e.target.value)}
-              className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Vent (km/h)</label>
-            <input
-              type="number"
-              value={vent}
-              onChange={(e) => setVent(e.target.value)}
-              className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Indice UV</label>
-            <input
-              type="number"
-              value={indiceUv}
-              onChange={(e) => setIndiceUv(e.target.value)}
-              className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Pluie (mm)</label>
-            <input
-              type="number"
-              value={qtePluie}
-              onChange={(e) => setQtePluie(e.target.value)}
-              className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
-            />
-          </div>
-        </div>
+        )}
         <button
           type="submit"
           disabled={loading}

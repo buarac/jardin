@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "@/components/ThemeProvider";
 
 /**
  * ThemeSwitcher renders two select fields allowing the user to choose the
