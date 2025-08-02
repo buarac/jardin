@@ -20,14 +20,14 @@ interface Culture {
 }
 
 async function fetchCultures(): Promise<Culture[]> {
-  const res = await fetch(`/api/cultures`, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Error fetching cultures');
+  const res = await fetch(`/api/cultures`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Error fetching cultures");
   return (await res.json()) as Culture[];
 }
 
 export default function CulturesPage() {
   const [cultures, setCultures] = useState<Culture[]>([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetchCultures()
@@ -37,7 +37,7 @@ export default function CulturesPage() {
 
   const currentYear = new Date().getFullYear();
   const filtered = cultures.filter((c) =>
-    c.nom.toLowerCase().includes(query.trim().toLowerCase())
+    c.nom.toLowerCase().includes(query.trim().toLowerCase()),
   );
 
   return (
@@ -72,7 +72,9 @@ export default function CulturesPage() {
                 )}
                 <div className="flex-1">
                   <div className="font-medium">{c.nom}</div>
-                  <div className="text-xs text-skin-text/70 capitalize">{c.categorie}</div>
+                  <div className="text-xs text-skin-text/70 capitalize">
+                    {c.categorie}
+                  </div>
                 </div>
                 <div className="text-sm text-right whitespace-nowrap">
                   {(totalPoids / 1000).toFixed(1)} kg

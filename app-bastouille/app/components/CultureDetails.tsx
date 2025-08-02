@@ -26,44 +26,59 @@ export const CultureDetails: React.FC<Props> = ({ initialData }) => {
   const [mode, setMode] = useState(initialData.mode_recolte);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const changed = nom !== initialData.nom || categorie !== initialData.categorie || mode !== initialData.mode_recolte;
+  const changed =
+    nom !== initialData.nom ||
+    categorie !== initialData.categorie ||
+    mode !== initialData.mode_recolte;
 
   const handleUpdate = async () => {
     setLoading(true);
     setMessage(null);
     try {
       const res = await fetch(`/api/cultures/${initialData.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nom, categorie, mode_recolte: mode, img: initialData.img })
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nom,
+          categorie,
+          mode_recolte: mode,
+          img: initialData.img,
+        }),
       });
       if (!res.ok) {
-        setMessage('Erreur lors de la mise à jour');
+        setMessage("Erreur lors de la mise à jour");
       } else {
-        setMessage('Culture mise à jour');
+        setMessage("Culture mise à jour");
       }
     } catch (error) {
       console.error(error);
-      setMessage('Erreur inconnue');
+      setMessage("Erreur inconnue");
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    if (!confirm('Supprimer cette culture ? Toutes les récoltes associées seront perdues.')) return;
+    if (
+      !confirm(
+        "Supprimer cette culture ? Toutes les récoltes associées seront perdues.",
+      )
+    )
+      return;
     setLoading(true);
     try {
-      const res = await fetch(`/api/cultures/${initialData.id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/cultures/${initialData.id}`, {
+        method: "DELETE",
+      });
       if (!res.ok) {
-        setMessage('Erreur lors de la suppression');
+        setMessage("Erreur lors de la suppression");
       } else {
-        setMessage('Culture supprimée');
-        router.push('/cultures');
+        setMessage("Culture supprimée");
+        router.push("/cultures");
       }
     } catch (error) {
       console.error(error);
-      setMessage('Erreur inconnue');
+      setMessage("Erreur inconnue");
     } finally {
       setLoading(false);
     }
@@ -101,7 +116,9 @@ export const CultureDetails: React.FC<Props> = ({ initialData }) => {
         </select>
       </div>
       <div>
-        <label className="block text-sm font-medium mb-1">Mode de récolte</label>
+        <label className="block text-sm font-medium mb-1">
+          Mode de récolte
+        </label>
         <select
           value={mode}
           onChange={(e) => setMode(e.target.value)}
@@ -117,7 +134,7 @@ export const CultureDetails: React.FC<Props> = ({ initialData }) => {
           disabled={loading}
           className="px-4 py-2 rounded-md bg-skin-accent text-white font-medium shadow hover:opacity-90 disabled:opacity-50"
         >
-          {loading ? 'Mise à jour...' : 'Mettre à jour'}
+          {loading ? "Mise à jour..." : "Mettre à jour"}
         </button>
       )}
       <button

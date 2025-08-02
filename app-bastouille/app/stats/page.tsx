@@ -26,21 +26,26 @@ interface SummaryEntry {
 
 export default function StatsPage() {
   const [years, setYears] = useState<number[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | ''>('');
+  const [selectedYear, setSelectedYear] = useState<number | "">("");
   const [summary, setSummary] = useState<SummaryEntry[]>([]);
   const [loading, setLoading] = useState(false);
-  const [sortConfig, setSortConfig] = useState<{ key: 'poids' | 'moyen' | 'nom', direction: 'asc' | 'desc' }>({
-    key: 'poids',
-    direction: 'desc'
+  const [sortConfig, setSortConfig] = useState<{
+    key: "poids" | "moyen" | "nom";
+    direction: "asc" | "desc";
+  }>({
+    key: "poids",
+    direction: "desc",
   });
 
   // Fetch all recoltes once to compute years list
   useEffect(() => {
     const fetchYears = async () => {
       try {
-        const res = await fetch('/api/recoltes');
+        const res = await fetch("/api/recoltes");
         const data = (await res.json()) as Recolte[];
-        const distinctYears = Array.from(new Set(data.map((r) => new Date(r.date).getFullYear()))).sort((a, b) => b - a);
+        const distinctYears = Array.from(
+          new Set(data.map((r) => new Date(r.date).getFullYear())),
+        ).sort((a, b) => b - a);
         setYears(distinctYears);
         if (distinctYears.length > 0) {
           setSelectedYear(distinctYears[0]);
@@ -68,27 +73,38 @@ export default function StatsPage() {
           }
           const entry = map.get(key)!;
           entry.poids += rec.poids;
-          if (rec.culture.mode_recolte === 'poids_unite' && rec.quantite !== null) {
+          if (
+            rec.culture.mode_recolte === "poids_unite" &&
+            rec.quantite !== null
+          ) {
             entry.quantite += rec.quantite;
           }
         }
         const sorted = Array.from(map.values()).sort((a, b) => {
-          let valueA: number | string = sortConfig.key === 'poids'
-            ? a.poids
-            : sortConfig.key === 'moyen'
-              ? a.quantite > 0 ? a.poids / a.quantite : 0
+          let valueA: number | string =
+            sortConfig.key === "poids"
+              ? a.poids
+              : sortConfig.key === "moyen"
+              ? a.quantite > 0
+                ? a.poids / a.quantite
+                : 0
               : a.culture.nom.toLowerCase();
 
-          let valueB: number | string = sortConfig.key === 'poids'
-            ? b.poids
-            : sortConfig.key === 'moyen'
-              ? b.quantite > 0 ? b.poids / b.quantite : 0
+          let valueB: number | string =
+            sortConfig.key === "poids"
+              ? b.poids
+              : sortConfig.key === "moyen"
+              ? b.quantite > 0
+                ? b.poids / b.quantite
+                : 0
               : b.culture.nom.toLowerCase();
 
-          if (typeof valueA === 'string' && typeof valueB === 'string') {
-            return sortConfig.direction === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+          if (typeof valueA === "string" && typeof valueB === "string") {
+            return sortConfig.direction === "asc"
+              ? valueA.localeCompare(valueB)
+              : valueB.localeCompare(valueA);
           } else {
-            return sortConfig.direction === 'asc'
+            return sortConfig.direction === "asc"
               ? (valueA as number) - (valueB as number)
               : (valueB as number) - (valueA as number);
           }
@@ -111,7 +127,11 @@ export default function StatsPage() {
           <label className="block text-sm font-medium mb-1">Année</label>
           <select
             value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value === '' ? '' : parseInt(e.target.value))}
+            onChange={(e) =>
+              setSelectedYear(
+                e.target.value === "" ? "" : parseInt(e.target.value),
+              )
+            }
             className="p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
           >
             <option value="">Choisir</option>
@@ -130,8 +150,11 @@ export default function StatsPage() {
                   className="p-2 cursor-pointer select-none"
                   onClick={() =>
                     setSortConfig((prev) => ({
-                      key: 'nom',
-                      direction: prev.key === 'nom' && prev.direction === 'desc' ? 'asc' : 'desc'
+                      key: "nom",
+                      direction:
+                        prev.key === "nom" && prev.direction === "desc"
+                          ? "asc"
+                          : "desc",
                     }))
                   }
                 >
@@ -141,8 +164,11 @@ export default function StatsPage() {
                   className="p-2 text-center cursor-pointer select-none"
                   onClick={() =>
                     setSortConfig((prev) => ({
-                      key: 'poids',
-                      direction: prev.key === 'poids' && prev.direction === 'desc' ? 'asc' : 'desc'
+                      key: "poids",
+                      direction:
+                        prev.key === "poids" && prev.direction === "desc"
+                          ? "asc"
+                          : "desc",
                     }))
                   }
                 >
@@ -152,8 +178,11 @@ export default function StatsPage() {
                   className="p-2 text-center cursor-pointer select-none"
                   onClick={() =>
                     setSortConfig((prev) => ({
-                      key: 'moyen',
-                      direction: prev.key === 'moyen' && prev.direction === 'desc' ? 'asc' : 'desc'
+                      key: "moyen",
+                      direction:
+                        prev.key === "moyen" && prev.direction === "desc"
+                          ? "asc"
+                          : "desc",
                     }))
                   }
                 >
@@ -163,7 +192,10 @@ export default function StatsPage() {
             </thead>
             <tbody>
               {summary.map((entry) => (
-                <tr key={entry.culture.id} className="border-b border-skin-muted">
+                <tr
+                  key={entry.culture.id}
+                  className="border-b border-skin-muted"
+                >
                   <td className="p-2 flex items-center gap-2 whitespace-nowrap">
                     {entry.culture.img && (
                       <img
@@ -174,18 +206,23 @@ export default function StatsPage() {
                     )}
                     <span>{entry.culture.nom}</span>
                   </td>
-                  <td className="p-2 whitespace-nowrap text-center">{(entry.poids / 1000).toFixed(2)}</td>
                   <td className="p-2 whitespace-nowrap text-center">
-                    {entry.culture.mode_recolte === 'poids_unite' && entry.quantite > 0
+                    {(entry.poids / 1000).toFixed(2)}
+                  </td>
+                  <td className="p-2 whitespace-nowrap text-center">
+                    {entry.culture.mode_recolte === "poids_unite" &&
+                    entry.quantite > 0
                       ? (entry.poids / entry.quantite / 1000).toFixed(2)
-                      : '-'}
+                      : "-"}
                   </td>
                 </tr>
               ))}
               {summary.length === 0 && (
                 <tr>
                   <td colSpan={3} className="p-4 text-center text-skin-text/70">
-                    {loading ? 'Chargement...' : 'Aucune donnée pour cette année'}
+                    {loading
+                      ? "Chargement..."
+                      : "Aucune donnée pour cette année"}
                   </td>
                 </tr>
               )}

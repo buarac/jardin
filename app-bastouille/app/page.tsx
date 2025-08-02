@@ -1,11 +1,5 @@
 // SafeAreaDebug: affiche les valeurs des safe-area-inset côté client
-import {
-  Thermometer,
-  Droplets,
-  Wind,
-  Sun,
-  CloudRain
-} from "lucide-react";
+import { Thermometer, Droplets, Wind, Sun, CloudRain } from "lucide-react";
 import { Header } from "@/components/Header";
 
 interface Recolte {
@@ -33,9 +27,12 @@ async function getLastRecoltes(): Promise<Recolte[]> {
   // relative URL returns an empty array. At runtime Next.js proxies the
   // request to the internal API routes.
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/api/recoltes?limit=5`, {
-      cache: 'no-store'
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/recoltes?limit=5`,
+      {
+        cache: "no-store",
+      },
+    );
     if (!res.ok) {
       return [];
     }
@@ -71,22 +68,25 @@ export default async function HomePage() {
                       </div>
                     )}
                     <div className="flex-[1_1_67%] space-y-1">
-                      <div className="text-lg text-skin-accent font-medium">{latest.culture.nom}</div>
+                      <div className="text-lg text-skin-accent font-medium">
+                        {latest.culture.nom}
+                      </div>
                       <div className="text-sm text-skin-accent/70 flex items-center gap-2">
                         <span>
-                          {new Date(latest.date).toLocaleString('fr-FR', {
-                            day: '2-digit',
-                            month: '2-digit',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
+                          {new Date(latest.date).toLocaleString("fr-FR", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
                           })}
                         </span>
                         <span className="text-skin-text">
                           {latest.poids / 1000} kg
-                          {latest.culture.mode_recolte === 'poids_unite' && latest.quantite !== null
+                          {latest.culture.mode_recolte === "poids_unite" &&
+                          latest.quantite !== null
                             ? ` • ${latest.quantite} unités`
-                            : ''}
+                            : ""}
                         </span>
                       </div>
                     </div>
@@ -149,21 +149,24 @@ export default async function HomePage() {
                 <div className="flex-1">
                   <div className="font-medium text-sm">{rec.culture.nom}</div>
                   <div className="text-xs text-skin-text/70">
-                    {new Date(rec.date).toLocaleDateString('fr-FR')}
+                    {new Date(rec.date).toLocaleDateString("fr-FR")}
                   </div>
                 </div>
                 <div className="text-sm">
                   {rec.poids / 1000} kg
-                  {rec.culture.mode_recolte === 'poids_unite' && rec.quantite !== null
+                  {rec.culture.mode_recolte === "poids_unite" &&
+                  rec.quantite !== null
                     ? ` • ${rec.quantite}`
-                    : ''}
+                    : ""}
                 </div>
               </div>
             ))}
           </div>
         )}
         {recoltes.length === 0 && (
-          <p className="text-sm text-skin-text/70">Aucune récolte pour le moment.</p>
+          <p className="text-sm text-skin-text/70">
+            Aucune récolte pour le moment.
+          </p>
         )}
       </div>
     </div>

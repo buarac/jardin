@@ -23,23 +23,27 @@ interface RecolteEntry {
 export default function RecoltesPage() {
   const [recoltes, setRecoltes] = useState<RecolteEntry[]>([]);
   const [years, setYears] = useState<number[]>([]);
-  const [selectedYear, setSelectedYear] = useState<string>('');
-  const [selectedMonth, setSelectedMonth] = useState<string>('');
-  const [selectedCategorie, setSelectedCategorie] = useState<string>('');
+  const [selectedYear, setSelectedYear] = useState<string>("");
+  const [selectedMonth, setSelectedMonth] = useState<string>("");
+  const [selectedCategorie, setSelectedCategorie] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async (params: { year?: string; month?: string; categorie?: string } = {}) => {
+  const fetchData = async (
+    params: { year?: string; month?: string; categorie?: string } = {},
+  ) => {
     setLoading(true);
     try {
-      const url = new URL('/api/recoltes', window.location.origin);
-      if (params.year) url.searchParams.set('year', params.year);
-      if (params.month) url.searchParams.set('month', params.month);
-      if (params.categorie) url.searchParams.set('categorie', params.categorie);
+      const url = new URL("/api/recoltes", window.location.origin);
+      if (params.year) url.searchParams.set("year", params.year);
+      if (params.month) url.searchParams.set("month", params.month);
+      if (params.categorie) url.searchParams.set("categorie", params.categorie);
       const res = await fetch(url.toString());
       const data = (await res.json()) as RecolteEntry[];
       setRecoltes(data);
       // compute distinct years
-      const distinctYears = Array.from(new Set(data.map((r) => new Date(r.date).getFullYear()))).sort((a, b) => b - a);
+      const distinctYears = Array.from(
+        new Set(data.map((r) => new Date(r.date).getFullYear())),
+      ).sort((a, b) => b - a);
       setYears(distinctYears);
     } catch (error) {
       console.error(error);
@@ -54,16 +58,24 @@ export default function RecoltesPage() {
 
   // When filters change, refetch
   useEffect(() => {
-    fetchData({ year: selectedYear || undefined, month: selectedMonth || undefined, categorie: selectedCategorie || undefined });
+    fetchData({
+      year: selectedYear || undefined,
+      month: selectedMonth || undefined,
+      categorie: selectedCategorie || undefined,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedYear, selectedMonth, selectedCategorie]);
 
   const handleDelete = async (id: number) => {
-    if (!confirm('Supprimer cette récolte ?')) return;
+    if (!confirm("Supprimer cette récolte ?")) return;
     try {
-      await fetch(`/api/recoltes/${id}`, { method: 'DELETE' });
+      await fetch(`/api/recoltes/${id}`, { method: "DELETE" });
       // refresh
-      fetchData({ year: selectedYear || undefined, month: selectedMonth || undefined, categorie: selectedCategorie || undefined });
+      fetchData({
+        year: selectedYear || undefined,
+        month: selectedMonth || undefined,
+        categorie: selectedCategorie || undefined,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -99,7 +111,7 @@ export default function RecoltesPage() {
               <option value="">Tous</option>
               {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                 <option key={m} value={m.toString()}>
-                  {m.toString().padStart(2, '0')}
+                  {m.toString().padStart(2, "0")}
                 </option>
               ))}
             </select>
@@ -119,7 +131,10 @@ export default function RecoltesPage() {
             </select>
           </div>
           <div className="ml-auto">
-            <Link href="/recoltes/new" className="px-4 py-2 rounded-md bg-skin-accent text-white font-medium shadow">
+            <Link
+              href="/recoltes/new"
+              className="px-4 py-2 rounded-md bg-skin-accent text-white font-medium shadow"
+            >
               Ajouter
             </Link>
           </div>
@@ -138,11 +153,18 @@ export default function RecoltesPage() {
             </thead>
             <tbody>
               {recoltes.map((r) => (
-                <tr key={r.id} className="border-b border-skin-muted hover:bg-skin-fill">
+                <tr
+                  key={r.id}
+                  className="border-b border-skin-muted hover:bg-skin-fill"
+                >
                   <td className="p-2 whitespace-nowrap">
-                    {new Date(r.date).toLocaleDateString('fr-FR')} {new Date(r.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                    {new Date(r.date).toLocaleDateString("fr-FR")}{" "}
+                    {new Date(r.date).toLocaleTimeString("fr-FR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </td>
-                    <td className="p-2 whitespace-nowrap flex items-center gap-2">
+                  <td className="p-2 whitespace-nowrap flex items-center gap-2">
                     {r.culture.img && (
                       <img
                         src={`/images/cultures/${r.culture.img}`}
@@ -152,9 +174,14 @@ export default function RecoltesPage() {
                     )}
                     <span>{r.culture.nom}</span>
                   </td>
-                  <td className="p-2 whitespace-nowrap">{(r.poids / 1000).toFixed(2)} kg</td>
                   <td className="p-2 whitespace-nowrap">
-                    {r.culture.mode_recolte === 'poids_unite' && r.quantite !== null ? r.quantite : '-'}
+                    {(r.poids / 1000).toFixed(2)} kg
+                  </td>
+                  <td className="p-2 whitespace-nowrap">
+                    {r.culture.mode_recolte === "poids_unite" &&
+                    r.quantite !== null
+                      ? r.quantite
+                      : "-"}
                   </td>
                   <td className="p-2 whitespace-nowrap text-right flex gap-2">
                     <Link
@@ -175,7 +202,7 @@ export default function RecoltesPage() {
               {recoltes.length === 0 && (
                 <tr>
                   <td colSpan={5} className="p-4 text-center text-skin-text/70">
-                    {loading ? 'Chargement...' : 'Aucune récolte'}
+                    {loading ? "Chargement..." : "Aucune récolte"}
                   </td>
                 </tr>
               )}

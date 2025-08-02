@@ -33,18 +33,28 @@ export const RecolteEditForm: React.FC<Props> = ({ initialData, cultures }) => {
   const router = useRouter();
   const [cultureId, setCultureId] = useState(initialData.id_culture);
   const [poids, setPoids] = useState(initialData.poids.toString());
-  const [quantite, setQuantite] = useState(initialData.quantite ? initialData.quantite.toString() : '');
+  const [quantite, setQuantite] = useState(
+    initialData.quantite ? initialData.quantite.toString() : "",
+  );
   const [dateTime, setDateTime] = useState(() => {
     // convert to local ISO for input
     const date = new Date(initialData.date);
     const tzOff = date.getTimezoneOffset() * 60000;
     return new Date(date.getTime() - tzOff).toISOString().slice(0, 16);
   });
-  const [temperature, setTemperature] = useState(initialData.temperature?.toString() ?? '');
-  const [humidite, setHumidite] = useState(initialData.humidite?.toString() ?? '');
-  const [vent, setVent] = useState(initialData.vent?.toString() ?? '');
-  const [indiceUv, setIndiceUv] = useState(initialData.indice_uv?.toString() ?? '');
-  const [qtePluie, setQtePluie] = useState(initialData.qte_pluie?.toString() ?? '');
+  const [temperature, setTemperature] = useState(
+    initialData.temperature?.toString() ?? "",
+  );
+  const [humidite, setHumidite] = useState(
+    initialData.humidite?.toString() ?? "",
+  );
+  const [vent, setVent] = useState(initialData.vent?.toString() ?? "");
+  const [indiceUv, setIndiceUv] = useState(
+    initialData.indice_uv?.toString() ?? "",
+  );
+  const [qtePluie, setQtePluie] = useState(
+    initialData.qte_pluie?.toString() ?? "",
+  );
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -60,7 +70,7 @@ export const RecolteEditForm: React.FC<Props> = ({ initialData, cultures }) => {
         date: dateTime,
         poids: parseInt(poids),
       };
-      if (selectedCulture?.mode_recolte === 'poids_unite' && quantite) {
+      if (selectedCulture?.mode_recolte === "poids_unite" && quantite) {
         payload.quantite = parseInt(quantite);
       } else {
         payload.quantite = null;
@@ -71,19 +81,19 @@ export const RecolteEditForm: React.FC<Props> = ({ initialData, cultures }) => {
       if (indiceUv) payload.indice_uv = parseFloat(indiceUv);
       if (qtePluie) payload.qte_pluie = parseFloat(qtePluie);
       const res = await fetch(`/api/recoltes/${initialData.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        setMessage('Erreur lors de la mise à jour');
+        setMessage("Erreur lors de la mise à jour");
       } else {
-        setMessage('Récolte mise à jour');
-        router.push('/recoltes');
+        setMessage("Récolte mise à jour");
+        router.push("/recoltes");
       }
     } catch (error) {
       console.error(error);
-      setMessage('Erreur inattendue');
+      setMessage("Erreur inattendue");
     } finally {
       setLoading(false);
     }
@@ -116,9 +126,11 @@ export const RecolteEditForm: React.FC<Props> = ({ initialData, cultures }) => {
           className="w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text"
         />
       </div>
-      {selectedCulture?.mode_recolte === 'poids_unite' && (
+      {selectedCulture?.mode_recolte === "poids_unite" && (
         <div>
-          <label className="block text-sm font-medium mb-1">Nombre d'unités</label>
+          <label className="block text-sm font-medium mb-1">
+            Nombre d'unités
+          </label>
           <input
             type="number"
             min="0"
@@ -139,7 +151,9 @@ export const RecolteEditForm: React.FC<Props> = ({ initialData, cultures }) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Température (°C)</label>
+          <label className="block text-sm font-medium mb-1">
+            Température (°C)
+          </label>
           <input
             type="number"
             value={temperature}
@@ -189,7 +203,7 @@ export const RecolteEditForm: React.FC<Props> = ({ initialData, cultures }) => {
         disabled={loading}
         className="w-full py-2 rounded-md bg-skin-accent text-white font-medium shadow hover:opacity-90 disabled:opacity-50"
       >
-        {loading ? 'Mise à jour...' : 'Mettre à jour'}
+        {loading ? "Mise à jour..." : "Mettre à jour"}
       </button>
       {message && <p className="text-sm text-skin-text/70">{message}</p>}
     </form>

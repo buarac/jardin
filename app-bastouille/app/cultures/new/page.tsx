@@ -6,10 +6,10 @@ import { useState } from "react";
 
 export default function NewCulturePage() {
   const router = useRouter();
-  const [nom, setNom] = useState('');
-  const [img, setImg] = useState('');
-  const [categorie, setCategorie] = useState('legume');
-  const [mode, setMode] = useState('poids');
+  const [nom, setNom] = useState("");
+  const [img, setImg] = useState("");
+  const [categorie, setCategorie] = useState("legume");
+  const [mode, setMode] = useState("poids");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -18,20 +18,25 @@ export default function NewCulturePage() {
     setLoading(true);
     setMessage(null);
     try {
-      const res = await fetch('/api/cultures', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nom, img: img || null, categorie, mode_recolte: mode })
+      const res = await fetch("/api/cultures", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nom,
+          img: img || null,
+          categorie,
+          mode_recolte: mode,
+        }),
       });
       if (!res.ok) {
-        setMessage('Erreur lors de la création de la culture');
+        setMessage("Erreur lors de la création de la culture");
       } else {
-        setMessage('Culture créée');
-        router.push('/cultures');
+        setMessage("Culture créée");
+        router.push("/cultures");
       }
     } catch (error) {
       console.error(error);
-      setMessage('Erreur inattendue');
+      setMessage("Erreur inattendue");
     } finally {
       setLoading(false);
     }
@@ -52,7 +57,9 @@ export default function NewCulturePage() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">Image (nom du fichier PNG)</label>
+          <label className="block text-sm font-medium mb-1">
+            Image (nom du fichier PNG)
+          </label>
           <input
             type="text"
             value={img}
@@ -74,7 +81,9 @@ export default function NewCulturePage() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">Mode de récolte</label>
+          <label className="block text-sm font-medium mb-1">
+            Mode de récolte
+          </label>
           <select
             value={mode}
             onChange={(e) => setMode(e.target.value)}
@@ -89,7 +98,7 @@ export default function NewCulturePage() {
           disabled={loading}
           className="w-full py-2 rounded-md bg-skin-accent text-white font-medium shadow hover:opacity-90 disabled:opacity-50"
         >
-          {loading ? 'Création...' : 'Créer'}
+          {loading ? "Création..." : "Créer"}
         </button>
         {message && <p className="text-sm text-skin-text/70">{message}</p>}
       </form>

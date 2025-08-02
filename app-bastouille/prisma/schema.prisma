@@ -12,7 +12,7 @@ generator client {
 }
 
 model culture {
-  id          String      @id @default(uuid())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   nom         String
   img         String?
   categorie   categorie   @default(legume)
@@ -23,7 +23,7 @@ model culture {
 model recolte {
   id          Int       @id @default(autoincrement())
   culture     culture   @relation(fields: [id_culture], references: [id])
-  id_culture  String
+  id_culture  String    @db.Uuid
   date        DateTime
   poids       Int
   quantite    Int?
@@ -44,4 +44,37 @@ enum categorie {
 enum moderecolte {
   poids
   poids_unite
+}
+
+enum job_status {
+  OK
+  KO
+  IGNORED
+  PARTIAL
+  PENDING
+}
+
+model meteo_jour {
+  id              Int      @id @default(autoincrement())
+  date            DateTime @unique
+  temperature_min Float
+  temperature_max Float
+  humidite        Float
+  vent            Float
+  indice_uv       Float
+  qte_pluie       Float
+  sunshine        Float
+  sunrise         DateTime
+  sunset          DateTime
+  source          String   @default("Open-Meteo")
+}
+
+model log_jobs {
+  id         Int       @id @default(autoincrement())
+  job_name   String
+  started_at DateTime
+  ended_at   DateTime?
+  status     job_status
+  message    String?
+  log        String?
 }

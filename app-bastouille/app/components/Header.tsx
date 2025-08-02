@@ -29,7 +29,10 @@ export const Header: React.FC<HeaderProps> = ({ title, backHref }) => {
     <header className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 border-b border-skin-muted bg-skin-card">
       <div className="flex items-center gap-2 min-w-0">
         {backHref ? (
-          <Link href={backHref} className="flex items-center p-2 rounded hover:bg-skin-fill transition-colors">
+          <Link
+            href={backHref}
+            className="flex items-center p-2 rounded hover:bg-skin-fill transition-colors"
+          >
             {/* Simple left arrow icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +58,10 @@ export const Header: React.FC<HeaderProps> = ({ title, backHref }) => {
       </div>
       <div className="flex items-center gap-2 min-w-0 justify-end">
         {pathname !== "/settings" && (
-          <Link href="/settings" className="flex items-center p-2 rounded hover:bg-skin-fill transition-colors">
+          <Link
+            href="/settings"
+            className="flex items-center p-2 rounded hover:bg-skin-fill transition-colors"
+          >
             {/* Gear icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -5,10 +5,15 @@ import { FooterNav } from "@/components/FooterNav";
 
 export const metadata: Metadata = {
   title: "Baštouille",
-  description: "Application de suivi de cultures et de récoltes pour le jardin."
+  description:
+    "Application de suivi de cultures et de récoltes pour le jardin.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr">
       <head>
@@ -17,15 +22,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Baštouille" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className="flex flex-col min-h-screen overflow-hidden">
         <ThemeProvider>
           {/* Main content area is scrollable and has bottom padding to avoid overlap with nav */}
-          <main className="flex-1 overflow-y-auto pb-20">
-            {children}
-          </main>
+          <main className="flex-1 overflow-y-auto pb-20">{children}</main>
           {/* Bottom navigation always visible */}
           <FooterNav />
         </ThemeProvider>

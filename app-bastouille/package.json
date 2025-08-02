@@ -3,11 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "clean": "rm -rf .next prisma/migrations node_modules",
+    "dev": "next dev",
+    "format": "prettier --write .",
+    "generate:client": "npx prisma generate",
     "lint": "next lint",
-    "prepare": "prisma generate"
+    "meteo:fetch": "ts-node scripts/fetchMeteo.ts",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:prod": "npx prisma migrate deploy --env=.env.production",
+    "postinstall": "prisma generate",
+    "prepare": "prisma generate",
+    "reset:db": "npx prisma migrate reset --force --skip-seed --env=.env",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@headlessui/react": "1.7.18",
@@ -15,8 +24,10 @@
     "@radix-ui/react-select": "^2.2.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.0.0",
+    "date-fns": "^4.1.0",
     "lucide-react": "^0.535.0",
     "next": "14.2.3",
+    "node-fetch": "^3.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^3.3.1",
@@ -24,6 +35,7 @@
   },
   "devDependencies": {
     "@types/node": "24.1.0",
+    "@types/node-fetch": "^2.6.13",
     "@types/react": "19.1.9",
     "autoprefixer": "10.4.15",
     "eslint": "8.45.0",
@@ -32,6 +44,7 @@
     "prettier": "3.0.0",
     "prisma": "5.4.1",
     "tailwindcss": "3.4.0",
-    "typescript": "5.1.3"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.1.3"
   }
 }

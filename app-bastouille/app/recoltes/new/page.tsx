@@ -22,7 +22,9 @@ import {
   Droplet,
   // add other icons as needed
 } from "lucide-react";
-import WeatherCodeToLabel, { WeatherCode } from "@/components/WeatherCodeToLabel";
+import WeatherCodeToLabel, {
+  WeatherCode,
+} from "@/components/WeatherCodeToLabel";
 
 interface CultureItem {
   id: string;
@@ -37,8 +39,8 @@ export default function NewRecoltePage() {
   const presetCultureId = searchParams.get("cultureId");
   const [cultures, setCultures] = useState<CultureItem[]>([]);
   const [cultureId, setCultureId] = useState<string | undefined>(undefined);
-  const [poids, setPoids] = useState('');
-  const [quantite, setQuantite] = useState('');
+  const [poids, setPoids] = useState("");
+  const [quantite, setQuantite] = useState("");
   const [dateTime, setDateTime] = useState(() => {
     const now = new Date();
     const tzOff = now.getTimezoneOffset() * 60000;
@@ -55,11 +57,16 @@ export default function NewRecoltePage() {
   const [loadingWeather, setLoadingWeather] = useState(false);
 
   useEffect(() => {
-    fetch('/api/cultures')
+    fetch("/api/cultures")
       .then((res) => res.json())
       .then((data: any[]) => {
         const simplified = data
-          .map((c) => ({ id: c.id, nom: c.nom, img: c.img, mode_recolte: c.mode_recolte }))
+          .map((c) => ({
+            id: c.id,
+            nom: c.nom,
+            img: c.img,
+            mode_recolte: c.mode_recolte,
+          }))
           .sort((a, b) => a.nom.localeCompare(b.nom));
         setCultures(simplified);
         if (presetCultureId) {
@@ -81,7 +88,7 @@ export default function NewRecoltePage() {
     setLoadingWeather(true);
     setMessage(null);
     try {
-      const res = await fetch('/api/meteo');
+      const res = await fetch("/api/meteo");
       if (!res.ok) {
         setMessage("Erreur lors de la récupération de la météo");
         setLoadingWeather(false);
@@ -105,7 +112,7 @@ export default function NewRecoltePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!cultureId || !poids) {
-      setMessage('Veuillez sélectionner une culture et saisir un poids');
+      setMessage("Veuillez sélectionner une culture et saisir un poids");
       return;
     }
     setLoading(true);
@@ -116,7 +123,7 @@ export default function NewRecoltePage() {
         date: dateTime,
         poids: parseInt(poids),
       };
-      if (selectedCulture?.mode_recolte === 'poids_unite' && quantite) {
+      if (selectedCulture?.mode_recolte === "poids_unite" && quantite) {
         payload.quantite = parseInt(quantite);
       }
       if (temperature !== null) payload.temperature = temperature;
@@ -124,18 +131,18 @@ export default function NewRecoltePage() {
       if (vent !== null) payload.vent = vent;
       if (indiceUv !== null) payload.indice_uv = indiceUv;
       if (qtePluie !== null) payload.qte_pluie = qtePluie;
-      const res = await fetch('/api/recoltes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+      const res = await fetch("/api/recoltes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        setMessage('Erreur lors de l\'ajout de la récolte');
+        setMessage("Erreur lors de l'ajout de la récolte");
       } else {
-        setMessage('Récolte ajoutée avec succès');
+        setMessage("Récolte ajoutée avec succès");
         // reset fields
-        setPoids('');
-        setQuantite('');
+        setPoids("");
+        setQuantite("");
         setTemperature(null);
         setHumidite(null);
         setVent(null);
@@ -143,11 +150,11 @@ export default function NewRecoltePage() {
         setQtePluie(null);
         setWeatherCode(null);
         // Optionally redirect back to home or recoltes page
-        router.push('/');
+        router.push("/");
       }
     } catch (error) {
       console.error(error);
-      setMessage('Erreur inattendue');
+      setMessage("Erreur inattendue");
     } finally {
       setLoading(false);
     }
@@ -160,7 +167,10 @@ export default function NewRecoltePage() {
         {/* Culture selection */}
         <div>
           <label className="block text-sm font-medium mb-1">Culture</label>
-          <Select onValueChange={(val) => setCultureId(val)} defaultValue={cultureId}>
+          <Select
+            onValueChange={(val) => setCultureId(val)}
+            defaultValue={cultureId}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Choisir une culture" />
             </SelectTrigger>
@@ -195,9 +205,11 @@ export default function NewRecoltePage() {
           />
         </div>
         {/* Quantité for poids_unite */}
-        {selectedCulture?.mode_recolte === 'poids_unite' && (
+        {selectedCulture?.mode_recolte === "poids_unite" && (
           <div>
-            <label className="block text-sm font-medium mb-1">Nombre d'unités</label>
+            <label className="block text-sm font-medium mb-1">
+              Nombre d'unités
+            </label>
             <input
               type="number"
               min="0"
@@ -209,23 +221,34 @@ export default function NewRecoltePage() {
         )}
         {/* Date/time */}
         <div>
-          <label className="block text-sm font-medium mb-1">Date et heure</label>
+          <label className="block text-sm font-medium mb-1">
+            Date et heure
+          </label>
           <span className="block w-full p-2 rounded-md border border-skin-muted bg-skin-fill text-skin-text/70">
-            {new Date(dateTime).toLocaleString('fr-FR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
+            {new Date(dateTime).toLocaleString("fr-FR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           </span>
         </div>
         {/* Weather display if present */}
-        {(temperature !== null || humidite !== null || vent !== null || indiceUv !== null || qtePluie !== null || weatherCode !== null) && (
+        {(temperature !== null ||
+          humidite !== null ||
+          vent !== null ||
+          indiceUv !== null ||
+          qtePluie !== null ||
+          weatherCode !== null) && (
           <div className="p-4 rounded-md border border-skin-muted bg-skin-fill/50 grid grid-cols-3 sm:grid-cols-6 gap-4 text-center">
             {weatherCode !== null && (
               <div className="flex flex-col items-center justify-center">
-                <WeatherCodeToLabel code={weatherCode as WeatherCode} large={true} hideText={true} />
+                <WeatherCodeToLabel
+                  code={weatherCode as WeatherCode}
+                  large={true}
+                  hideText={true}
+                />
               </div>
             )}
             {temperature !== null && (
@@ -265,7 +288,7 @@ export default function NewRecoltePage() {
           disabled={loading}
           className="w-full py-2 rounded-md bg-skin-accent text-white font-medium shadow hover:opacity-90 disabled:opacity-50"
         >
-          {loading ? 'Ajout...' : 'Ajouter'}
+          {loading ? "Ajout..." : "Ajouter"}
         </button>
         {message && <p className="text-sm text-skin-text/70">{message}</p>}
       </form>

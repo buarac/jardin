@@ -1,13 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  Droplets,
-  Thermometer,
-  Sun,
-  Wind,
-  CloudSun,
-} from "lucide-react";
+import { Droplets, Thermometer, Sun, Wind, CloudSun } from "lucide-react";
 import WeatherDisplayCard from "@/components/WeatherDisplayCard";
 
 export default function DemoPage() {

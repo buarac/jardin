@@ -13,7 +13,7 @@ export async function GET(_request: Request, { params }: Params) {
   try {
     const culture = await prisma.culture.findUnique({
       where: { id: params.id },
-      include: { recoltes: true }
+      include: { recoltes: true },
     });
     if (!culture) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -21,7 +21,10 @@ export async function GET(_request: Request, { params }: Params) {
     return NextResponse.json(culture);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to fetch culture" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch culture" },
+      { status: 500 },
+    );
   }
 }
 
@@ -39,13 +42,16 @@ export async function PUT(request: Request, { params }: Params) {
         nom,
         img,
         categorie,
-        mode_recolte
-      }
+        mode_recolte,
+      },
     });
     return NextResponse.json(culture);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to update culture" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update culture" },
+      { status: 500 },
+    );
   }
 }
 
@@ -60,6 +66,9 @@ export async function DELETE(_request: Request, { params }: Params) {
     return NextResponse.json({});
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to delete culture" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to delete culture" },
+      { status: 500 },
+    );
   }
 }

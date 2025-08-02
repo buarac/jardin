@@ -33,7 +33,9 @@ export async function GET(request: Request) {
     }
     if (monthParam) {
       const month = parseInt(monthParam) - 1;
-      const nowYear = yearParam ? parseInt(yearParam) : new Date().getFullYear();
+      const nowYear = yearParam
+        ? parseInt(yearParam)
+        : new Date().getFullYear();
       if (!Number.isNaN(month)) {
         let start = new Date(Date.UTC(nowYear, month, 1));
         let end = new Date(Date.UTC(nowYear, month + 1, 1));
@@ -54,12 +56,15 @@ export async function GET(request: Request) {
       where,
       include: { culture: true },
       orderBy: { date: "desc" },
-      take
+      take,
     });
     return NextResponse.json(recoltes);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to fetch recoltes" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch recoltes" },
+      { status: 500 },
+    );
   }
 }
 
@@ -80,11 +85,12 @@ export async function POST(request: Request) {
       humidite,
       vent,
       indice_uv,
-      qte_pluie
+      qte_pluie,
     } = body;
     const parsedDate = date ? new Date(date) : new Date();
     const poidsInt = parseInt(poids);
-    const quantiteInt = quantite !== undefined && quantite !== null ? parseInt(quantite) : null;
+    const quantiteInt =
+      quantite !== undefined && quantite !== null ? parseInt(quantite) : null;
     const recolte = await prisma.recolte.create({
       data: {
         id_culture,
@@ -95,12 +101,15 @@ export async function POST(request: Request) {
         humidite: humidite !== undefined ? parseFloat(humidite) : null,
         vent: vent !== undefined ? parseFloat(vent) : null,
         indice_uv: indice_uv !== undefined ? parseFloat(indice_uv) : null,
-        qte_pluie: qte_pluie !== undefined ? parseFloat(qte_pluie) : null
-      }
+        qte_pluie: qte_pluie !== undefined ? parseFloat(qte_pluie) : null,
+      },
     });
     return NextResponse.json(recolte, { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to create recolte" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to create recolte" },
+      { status: 500 },
+    );
   }
 }

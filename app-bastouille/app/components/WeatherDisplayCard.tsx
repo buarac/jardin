@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Droplets,
-  Thermometer,
-  SunMedium,
-  Wind,
-  CloudSun
-} from "lucide-react";
+import { Droplets, Thermometer, SunMedium, Wind, CloudSun } from "lucide-react";
 
 interface WeatherDisplayCardProps {
   temperature: number;

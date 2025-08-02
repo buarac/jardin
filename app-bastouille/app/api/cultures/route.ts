@@ -8,12 +8,15 @@ import { prisma } from "@lib/db";
 export async function GET() {
   try {
     const cultures = await prisma.culture.findMany({
-      include: { recoltes: true }
+      include: { recoltes: true },
     });
     return NextResponse.json(cultures);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to fetch cultures" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch cultures" },
+      { status: 500 },
+    );
   }
 }
 
@@ -30,12 +33,15 @@ export async function POST(request: Request) {
         nom,
         img: img || null,
         categorie,
-        mode_recolte
-      }
+        mode_recolte,
+      },
     });
     return NextResponse.json(culture, { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to create culture" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to create culture" },
+      { status: 500 },
+    );
   }
 }

@@ -14,7 +14,7 @@ export async function GET(_req: Request, { params }: Params) {
     const id = parseInt(params.id);
     const recolte = await prisma.recolte.findUnique({
       where: { id },
-      include: { culture: true }
+      include: { culture: true },
     });
     if (!recolte) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -22,7 +22,10 @@ export async function GET(_req: Request, { params }: Params) {
     return NextResponse.json(recolte);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to fetch recolte" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch recolte" },
+      { status: 500 },
+    );
   }
 }
 
@@ -43,23 +46,31 @@ export async function PUT(request: Request, { params }: Params) {
       humidite,
       vent,
       indice_uv,
-      qte_pluie
+      qte_pluie,
     } = body;
     const updateData: any = {};
     if (id_culture) updateData.id_culture = id_culture;
     if (date) updateData.date = new Date(date);
     if (poids !== undefined) updateData.poids = parseInt(poids);
-    if (quantite !== undefined) updateData.quantite = quantite !== null ? parseInt(quantite) : null;
-    if (temperature !== undefined) updateData.temperature = parseFloat(temperature);
+    if (quantite !== undefined)
+      updateData.quantite = quantite !== null ? parseInt(quantite) : null;
+    if (temperature !== undefined)
+      updateData.temperature = parseFloat(temperature);
     if (humidite !== undefined) updateData.humidite = parseFloat(humidite);
     if (vent !== undefined) updateData.vent = parseFloat(vent);
     if (indice_uv !== undefined) updateData.indice_uv = parseFloat(indice_uv);
     if (qte_pluie !== undefined) updateData.qte_pluie = parseFloat(qte_pluie);
-    const recolte = await prisma.recolte.update({ where: { id }, data: updateData });
+    const recolte = await prisma.recolte.update({
+      where: { id },
+      data: updateData,
+    });
     return NextResponse.json(recolte);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to update recolte" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update recolte" },
+      { status: 500 },
+    );
   }
 }
 
@@ -74,6 +85,9 @@ export async function DELETE(_req: Request, { params }: Params) {
     return NextResponse.json({});
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to delete recolte" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to delete recolte" },
+      { status: 500 },
+    );
   }
 }

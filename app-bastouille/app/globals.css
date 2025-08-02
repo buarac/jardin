@@ -13,7 +13,7 @@
 }
 
 /* Soleil du Sud theme */
-html[data-theme='soleil'][data-mode='light'] {
+html[data-theme="soleil"][data-mode="light"] {
   --color-base: #fef9ef;
   --color-fill: #fff6e8;
   --color-text: #2f2f1e;
@@ -21,7 +21,7 @@ html[data-theme='soleil'][data-mode='light'] {
   --color-muted: #e5d5b0;
   --color-card: #ffffff;
 }
-html[data-theme='soleil'][data-mode='dark'] {
+html[data-theme="soleil"][data-mode="dark"] {
   --color-base: #1f1a12;
   --color-fill: #2a251c;
   --color-text: #f5eedb;
@@ -31,7 +31,7 @@ html[data-theme='soleil'][data-mode='dark'] {
 }
 
 /* Lavande et Romarin theme */
-html[data-theme='lavande'][data-mode='light'] {
+html[data-theme="lavande"][data-mode="light"] {
   --color-base: #f9f7fc;
   --color-fill: #f0ebf8;
   --color-text: #2b223a;
@@ -39,7 +39,7 @@ html[data-theme='lavande'][data-mode='light'] {
   --color-muted: #d9cee8;
   --color-card: #ffffff;
 }
-html[data-theme='lavande'][data-mode='dark'] {
+html[data-theme="lavande"][data-mode="dark"] {
   --color-base: #201c2b;
   --color-fill: #2c2740;
   --color-text: #ebe3f7;
@@ -52,8 +52,6 @@ body {
   background-color: var(--color-base);
   color: var(--color-text);
 }
-
-
 
 @layer base {
   :root {
@@ -110,8 +108,6 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {

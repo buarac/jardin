@@ -19,11 +19,14 @@ interface PageProps {
  * route will be resolved by Next.js at runtime.
  */
 async function getCulture(id: string): Promise<CultureResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/api/cultures/${id}`, {
-    cache: 'no-store'
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/cultures/${id}`,
+    {
+      cache: "no-store",
+    },
+  );
   if (!res.ok) {
-    throw new Error('Failed to fetch culture');
+    throw new Error("Failed to fetch culture");
   }
   return (await res.json()) as CultureResponse;
 }

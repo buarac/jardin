@@ -29,7 +29,9 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
  * to localStorage. It also updates data attributes on the html element so
  * CSS variables defined in `globals.css` take effect.
  */
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [theme, setThemeState] = useState<ThemeName>("soleil");
   const [mode, setModeState] = useState<ColorMode>("light");
 
@@ -52,7 +54,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     document.documentElement.setAttribute("data-theme", theme);
     if (mode === "system") {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-mode", isDark ? "dark" : "light");
+      document.documentElement.setAttribute(
+        "data-mode",
+        isDark ? "dark" : "light",
+      );
     } else {
       document.documentElement.setAttribute("data-mode", mode);
     }
