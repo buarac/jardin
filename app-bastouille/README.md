@@ -1,97 +1,47 @@
-# Baštouille
+# 📘 Documentation du projet *app-bastouille*
 
-Baštouille est une application web de suivi de cultures et de récoltes pour votre jardin. Elle est conçue pour fonctionner sur mobile comme sur ordinateur avec une interface responsive et une prise en charge des PWA afin de l'installer sur l'écran d'accueil d'un iPhone.
+## Table des matières
 
-## Fonctionnalités principales
+### 1. Introduction
+- [1.1 Objectif du projet](#11-objectif-du-projet)
+- [1.2 Public cible](#12-public-cible)
+- [1.3 Technologies utilisées](#13-technologies-utilisées)
 
-- **Gestion des cultures** : création, édition, suppression et liste des cultures avec recherche par nom.
-- **Gestion des récoltes** : ajout, édition, suppression et filtrage des récoltes par année, mois ou catégorie.
-- **Statistiques** : visualisation des cumuls de récoltes par année et par culture avec poids total et nombre d'unités.
-- **Thèmes** : deux identités visuelles sont proposées (Soleil du Sud et Lavande et Romarin) avec un mode clair et sombre. Le choix est mémorisé dans le navigateur.
-- **Navigation adaptative** : sur mobile la barre de navigation inférieure est réduite et certaines fonctionnalités (liste complète des récoltes ou des cultures) sont masquées pour privilégier l'ajout rapide ; sur ordinateur toutes les fonctionnalités sont disponibles.
+### 2. Structure du projet
+- [2.1 Arborescence des dossiers](#21-arborescence-des-dossiers)
+- [2.2 Fonctionnement général](#22-fonctionnement-général)
 
-## Prérequis
+### 3. Fonctionnalités principales
+- [3.1 Gestion des cultures](#31-gestion-des-cultures)
+- [3.2 Gestion des récoltes](#32-gestion-des-récoltes)
+- [3.3 Données météo (Open-Meteo)](#33-données-météo-(open-meteo))
+- [3.4 Tableau de bord et statistiques](#34-tableau-de-bord-et-statistiques)
+- [3.5 Interface mobile vs desktop](#35-interface-mobile-vs-desktop)
 
-- [Node.js](https://nodejs.org/) v18 ou supérieur
-- [npm](https://www.npmjs.com/) v9 ou supérieur
-- [PostgreSQL](https://www.postgresql.org/) : une base de données nommée `bastouille` doit être accessible. Le schéma de base est défini dans le fichier `prisma/schema.prisma`.
+### 4. Composants techniques
+- [4.1 API REST](#41-api-rest)
+- [4.2 Prisma ORM et base de données](#42-prisma-orm-et-base-de-données)
+- [4.3 Système de Jobs (alimentation météo)](#43-système-de-jobs-(alimentation-météo))
+- [4.4 Thème et dark mode](#44-thème-et-dark-mode)
+- [4.5 Composants UI (shadcn/ui, Tailwind)](#45-composants-ui-(shadcn/ui,-tailwind))
+- [4.6 PWA et installation sur iPhone](#46-pwa-et-installation-sur-iphone)
 
-## Installation
+### 5. Déploiement et production
+- [5.1 Configuration PM2](#51-configuration-pm2)
+- [5.2 Tâches CRON avec PM2](#52-tâches-cron-avec-pm2)
+- [5.3 Configuration des environnements](#53-configuration-des-environnements)
 
-1. **Cloner le dépôt**
+### 6. Développement et tests
+- [6.1 Lancer en mode développement](#61-lancer-en-mode-développement)
+- [6.2 Lancer un build de production](#62-lancer-un-build-de-production)
+- [6.3 Tests manuels et debugging](#63-tests-manuels-et-debugging)
 
-   ```bash
-   git clone <url-du-depot> app-bastouille
-   cd app-bastouille
-   ```
+### 7. Perspectives d’évolution
+- [7.1 Fonctionnalités à venir](#71-fonctionnalités-à-venir)
+- [7.2 Améliorations possibles](#72-améliorations-possibles)
 
-2. **Configurer l'environnement**
-
-   Copiez le fichier d'exemple `.env.example` vers `.env` et adaptez la chaîne de connexion à votre serveur PostgreSQL :
-
-   ```bash
-   cp .env.example .env
-   # Éditer .env pour ajuster DATABASE_URL
-   ```
-
-3. **Installer les dépendances**
-
-   ```bash
-   npm install
-   ```
-
-4. **Initialiser la base de données**
-
-   Le modèle de données est défini via [Prisma](https://www.prisma.io/). Exécutez les migrations pour créer les tables :
-
-   ```bash
-   npx prisma migrate dev --name init
-   ```
-
-5. **Démarrer l'application en développement**
-
-   ```bash
-   npm run dev
-   ```
-
-   L'application est accessible sur `http://localhost:3000`.
-
-## Structure du projet
-
-- `app/` : répertoire racine des pages Next.js utilisant le système `app router`. Chaque sous‐dossier représente une route et peut contenir des composants clients pour l’interactivité.
-- `app/components/` : composants réutilisables tels que la barre de navigation (`FooterNav`), l’entête (`Header`), les formulaires, etc.
-- `prisma/` : contient le schéma Prisma décrivant les tables `Culture` et `Recolte`. Le générateur Prisma crée automatiquement le client dans `node_modules/.prisma/client`.
-- `public/` : ressources statiques servies telles que l’icône PWA et un placeholder d’image. Vous pouvez ajouter vos propres images de cultures dans `public/images/cultures/` et renseigner leur nom dans le champ `img` d’une culture.
-- `app/globals.css` : styles globaux et définitions des variables CSS utilisées par les thèmes. Les variables sont appliquées en fonction des attributs `data-theme` et `data-mode` sur l’élément `<html>`.
-- `app/components/ThemeProvider.tsx` : contexte React chargé de mémoriser et d’appliquer le thème et le mode couleur.
-- `app/api/` : routes d’API (CRUD) pour les cultures et les récoltes. Elles utilisent Prisma pour interagir avec la base.
-
-## Changement d’identité visuelle
-
-Deux thèmes sont fournis : **Soleil du Sud** (teintes chaudes) et **Lavande et Romarin** (teintes mauves). Chaque thème possède une variante claire et sombre. Le choix du thème et du mode se fait dans l’onglet Paramétrage via un sélecteur.
-
-Pour modifier les couleurs ou ajouter de nouveaux thèmes :
-
-1. Ouvrez `app/globals.css` et localisez les blocs `html[data-theme='nom']`.
-2. Modifiez les variables CSS `--color-base`, `--color-fill`, `--color-text`, `--color-accent`, `--color-muted` et `--color-card` selon votre palette.
-3. Si vous ajoutez un nouveau thème, actualisez également le type `ThemeName` dans `app/components/ThemeProvider.tsx` et ajoutez des options correspondantes dans `ThemeSwitcher.tsx`.
-
-## Gestion de la PWA
-
-Le fichier `public/manifest.json` décrit les informations de l’application pour l’installation sur mobile (nom, icônes, couleurs). Deux icônes génériques sont fournies (`icon-192.png` et `icon-512.png`). Remplacez‐les par vos propres images si nécessaire. Pour activer le service worker, vous pouvez intégrer un outil comme `next-pwa` dans `next.config.js`.
-
-## Déploiement
-
-En production, exécutez :
-
-```bash
-npm run build
-npm start
-```
-
-ou déployez l’application sur une plateforme compatible avec Next.js (Vercel, Railway, etc.). N’oubliez pas de fournir la variable d’environnement `DATABASE_URL`.
-
-## Licence
-
-Ce projet est fourni à titre d’exemple pour illustrer la création d’une application web complète avec Next.js, Prisma et Tailwind. Adaptez et améliorez le selon vos besoins !
-<ChartLine color="#669c35" />
+### Annexes
+- [A.1 Exemple de fichier .env](#a1-exemple-de-fichier-env)
+- [A.2 Requête API typique](#a2-requête-api-typique)
+- [A.3 Astuces de développement](#a3-astuces-de-développement)
+	

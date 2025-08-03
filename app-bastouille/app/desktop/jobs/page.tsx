@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { ArrowUp, ArrowDown, BadgeCheck, CircleX, EyeOff, Activity, Clock } from "lucide-react";
 import { cn } from "@lib/utils";
 
@@ -35,6 +35,12 @@ export default function LogJobsPage() {
   const sorted = [...data].sort((a, b) => {
     const aVal = a[sortKey];
     const bVal = b[sortKey];
+
+    if (aVal === null || bVal === null) {
+      if (aVal === null && bVal === null) return 0;
+      return aVal === null ? 1 : -1;
+    }
+
     if (aVal > bVal) return sortDesc ? -1 : 1;
     if (aVal < bVal) return sortDesc ? 1 : -1;
     return 0;

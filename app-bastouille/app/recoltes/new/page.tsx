@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+export const dynamic = "force-dynamic";
+
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Select,
@@ -33,7 +35,7 @@ interface CultureItem {
   mode_recolte: string;
 }
 
-export default function NewRecoltePage() {
+function InnerNewRecoltePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const presetCultureId = searchParams.get("cultureId");
@@ -293,5 +295,13 @@ export default function NewRecoltePage() {
         {message && <p className="text-sm text-skin-text/70">{message}</p>}
       </form>
     </div>
+  );
+}
+
+export default function NewRecoltePage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <InnerNewRecoltePage />
+    </Suspense>
   );
 }

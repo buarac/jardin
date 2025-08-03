@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { FooterNav } from "@/components/FooterNav";
 
 export const metadata: Metadata = {
   title: "Baštouille",
@@ -30,10 +29,7 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen overflow-hidden">
         <ThemeProvider>
-          {/* Main content area is scrollable and has bottom padding to avoid overlap with nav */}
-          <main className="flex-1 overflow-y-auto pb-20">{children}</main>
-          {/* Bottom navigation always visible */}
-          <FooterNav />
+          {children}
         </ThemeProvider>
       </body>
     </html>

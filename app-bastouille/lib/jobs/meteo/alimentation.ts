@@ -9,22 +9,35 @@ const prisma = new PrismaClient();
 const latitude = 48.9956;
 const longitude = 2.2175;
 
-const debut = new Date();
-const logger = new JobLogger("alimentation_meteo", debut);
-
 async function main() {
+  const debut = new Date();
+  const logger = new JobLogger("alimentation_meteo", debut);
+
   const yesterday = subDays(new Date(), 1);
   const dateStr = format(yesterday, "yyyy-MM-dd");
 
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,uv_index_max,sunrise,sunset,windspeed_10m_max,sunshine_duration,relative_humidity_2m_mean&timezone=auto&start_date=${dateStr}&end_date=${dateStr}`;
 
+  type OpenMeteoDailyResponse = {
+    daily: {
+      temperature_2m_min: number[];
+      temperature_2m_max: number[];
+      precipitation_sum: number[];
+      uv_index_max: number[];
+      sunrise: string[];
+      sunset: string[];
+      windspeed_10m_max: number[];
+      sunshine_duration: number[];
+      relative_humidity_2m_mean: number[];
+    };
+  };
   let json;
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Erreur lors de la récupération des données météo : ${response.statusText}`);
     }
-    json = await response.json();
+    json = (await response.json()) as OpenMeteoDailyResponse;
 
 } catch (error: any) {
     await logger.fail("Erreur d'accès à l'api Open-Meteo", error);
@@ -114,9 +127,5 @@ async function main() {
     return;
   }
 }
-
-main().finally(async () => {
-  await prisma.$disconnect();
-});
 
 export { main as runJob };
