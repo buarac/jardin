@@ -12,15 +12,5 @@ module.exports = {
         PORT: 3000
       }
     },
-
-    // Job météo programmé tous les jours à 4h00
-    {
-      name: "job-meteo-alimentation",
-      script: "curl",
-      args: "http://localhost:3000/api/jobs/meteo/alimentation",
-      cron_restart: "0 4 * * *", // tous les jours à 04:00
-      autorestart: false,
-      watch: false
-    }
   ]
 };
