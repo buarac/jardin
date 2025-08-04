@@ -25,11 +25,7 @@ CREATE TABLE "recolte" (
     "date" TIMESTAMP(3) NOT NULL,
     "poids" INTEGER NOT NULL,
     "quantite" INTEGER,
-    "temperature" DOUBLE PRECISION,
-    "humidite" DOUBLE PRECISION,
-    "vent" DOUBLE PRECISION,
-    "indice_uv" DOUBLE PRECISION,
-    "qte_pluie" DOUBLE PRECISION,
+    "quantite_fiable" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "recolte_pkey" PRIMARY KEY ("id")
 );
@@ -64,6 +60,16 @@ CREATE TABLE "log_jobs" (
     "log" TEXT,
 
     CONSTRAINT "log_jobs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "recipient" (
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "nom" TEXT NOT NULL,
+    "img" TEXT,
+    "poids" INTEGER NOT NULL,
+
+    CONSTRAINT "recipient_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

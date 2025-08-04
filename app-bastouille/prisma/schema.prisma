@@ -27,11 +27,7 @@ model recolte {
   date        DateTime
   poids       Int
   quantite    Int?
-  temperature Float?
-  humidite    Float?
-  vent        Float?
-  indice_uv   Float?
-  qte_pluie   Float?
+  quantite_fiable Boolean @default(false)
 }
 
 enum categorie {
@@ -78,4 +74,11 @@ model log_jobs {
   status     job_status
   message    String?
   log        String?
+}
+
+model recipient {
+  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nom    String
+  img    String?
+  poids  Int
 }

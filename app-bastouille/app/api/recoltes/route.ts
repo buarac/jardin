@@ -19,46 +19,75 @@ export async function GET(request: Request) {
     const monthParam = searchParams.get("month");
     const categorie = searchParams.get("categorie");
     const cultureId = searchParams.get("cultureId");
+    const periode = searchParams.get("periode");
+
+    const now = new Date();
+    let start: Date | undefined;
+    let end: Date | undefined;
+
+    // Gestion du paramètre "periode"
+    if (periode) {
+      if (periode === "annee") {
+        start = new Date(now.getFullYear(), 0, 1);
+        start.setHours(0, 0, 0, 0);
+        end = new Date(now.getFullYear() + 1, 0, 1);
+      } else if (periode === "mois") {
+        start = new Date(now.getFullYear(), now.getMonth(), 1);
+        start.setHours(0, 0, 0, 0);
+        end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      } else if (periode === "semaine") {
+        const current = new Date();
+        current.setHours(0, 0, 0, 0);
+        start = new Date(current);
+        start.setDate(current.getDate() - 6); // inclut aujourd'hui
+        end = new Date(current);
+        end.setDate(current.getDate() + 1); // inclut toute la journée d'aujourd'hui
+        end.setHours(0, 0, 0, 0);
+      }
+    } else if (yearParam || monthParam) {
+      const year = parseInt(yearParam || now.getFullYear().toString());
+      const month = monthParam ? parseInt(monthParam) - 1 : 0;
+
+      start = new Date(Date.UTC(year, month, 1));
+      start.setHours(0, 0, 0, 0);
+      end = monthParam
+        ? new Date(Date.UTC(year, month + 1, 1))
+        : new Date(Date.UTC(year + 1, 0, 1));
+    }
 
     const where: any = {};
-    // Filter by date range if year and/or month provided
-    if (yearParam) {
-      const year = parseInt(yearParam);
-      if (!Number.isNaN(year)) {
-        // range from Jan 1 to Dec 31 inclusive
-        let start = new Date(Date.UTC(year, 0, 1));
-        let end = new Date(Date.UTC(year + 1, 0, 1));
-        where.date = { gte: start, lt: end };
-      }
+    if (start && end) {
+      where.date = { gte: start, lt: end };
     }
-    if (monthParam) {
-      const month = parseInt(monthParam) - 1;
-      const nowYear = yearParam
-        ? parseInt(yearParam)
-        : new Date().getFullYear();
-      if (!Number.isNaN(month)) {
-        let start = new Date(Date.UTC(nowYear, month, 1));
-        let end = new Date(Date.UTC(nowYear, month + 1, 1));
-        where.date = { gte: start, lt: end };
-      }
-    }
-    // Filter by categorie if provided (delegated to culture relation)
     if (categorie) {
       where.culture = { categorie };
     }
-    // Filter by cultureId if provided
     if (cultureId) {
       where.id_culture = cultureId;
     }
     const limitParam = searchParams.get("limit");
     const take = limitParam ? parseInt(limitParam) : undefined;
-    const recoltes = await prisma.recolte.findMany({
+    const recoltes = await prisma.recolte.groupBy({
+      by: ["id_culture"],
       where,
-      include: { culture: true },
-      orderBy: { date: "desc" },
-      take,
+      _sum: {
+        poids: true,
+      },
     });
-    return NextResponse.json(recoltes);
+
+    const enriched = await Promise.all(
+      recoltes.map(async (r) => {
+        const culture = await prisma.culture.findUnique({
+          where: { id: r.id_culture },
+        });
+        return {
+          id_culture: r.id_culture,
+          poids: r._sum.poids ?? 0,
+          culture,
+        };
+      })
+    );
+    return NextResponse.json(enriched);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
