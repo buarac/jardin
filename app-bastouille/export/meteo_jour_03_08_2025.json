@@ -1,0 +1,30 @@
+[
+  {
+    "id": 10,
+    "date": "2025-08-01T00:00:00.000Z",
+    "temperature_min": 16.8,
+    "temperature_max": 22.5,
+    "humidite": 70,
+    "vent": 18.4,
+    "indice_uv": 5.2,
+    "qte_pluie": 0.4,
+    "sunshine": 12.37588055555556,
+    "sunrise": "2025-08-01T04:24:00.000Z",
+    "sunset": "2025-08-01T19:30:00.000Z",
+    "source": "Open-Meteo"
+  },
+  {
+    "id": 11,
+    "date": "2025-08-02T00:00:00.000Z",
+    "temperature_min": 12.8,
+    "temperature_max": 21.1,
+    "humidite": 65,
+    "vent": 15.1,
+    "indice_uv": 4.85,
+    "qte_pluie": 1,
+    "sunshine": 9.975944444444444,
+    "sunrise": "2025-08-02T04:25:00.000Z",
+    "sunset": "2025-08-02T19:28:00.000Z",
+    "source": "Open-Meteo"
+  }
+]

@@ -10,9 +10,8 @@ const latitude = 48.9956;
 const longitude = 2.2175;
 
 async function main() {
-  const debut = new Date();
-  const logger = new JobLogger("alimentation_meteo", debut);
-
+  const startedAt = new Date();
+  const logger = new JobLogger();
   const yesterday = subDays(new Date(), 1);
   const dateStr = format(yesterday, "yyyy-MM-dd");
 
@@ -33,13 +32,16 @@ async function main() {
   };
   let json;
   try {
+
+    logger.start("alimentation_meteo", startedAt);
+
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Erreur lors de la récupération des données météo : ${response.statusText}`);
     }
     json = (await response.json()) as OpenMeteoDailyResponse;
 
-} catch (error: any) {
+  } catch (error: any) {
     await logger.fail("Erreur d'accès à l'api Open-Meteo", error);
     console.warn("⚠️ Erreur d'accès à l'api Open-Meteo");
     return;
@@ -69,7 +71,7 @@ async function main() {
     return;
   }
 
-  const data = json as {    
+  const data = json as {
     daily: {
       temperature_2m_min: number[];
       temperature_2m_max: number[];

@@ -5,19 +5,23 @@ const prisma = new PrismaClient();
 export class JobLogger {
   private id: number | undefined;
 
-  constructor(private jobName: string, private startedAt: Date) {
-    prisma.log_jobs.create({
+
+  public async start(jobName: string, startedAt: Date) {
+    await prisma.log_jobs.create({
       data: {
-        job_name: this.jobName,
-        started_at: this.startedAt,
+        job_name: jobName,
+        started_at: startedAt,
         status: "PENDING",
         message: "Job démarré",
       },
     }).then((log) => {
+      //console.log("JobLogger started, log = ",log);
       this.id = log.id;
     }).catch((err) => {
+      //console.log("Erreur lors de la création du log de job:", err);
       console.error("Erreur lors de la création du log de job:", err);
     });
+    //console.log(`JobLogger started, id = ${this.id}`);
   }
 
   public async success(message: string) {
@@ -41,6 +45,7 @@ export class JobLogger {
     message: string,
     log?: string
   ) {
+    //console.log(`JobLogger: id = ${this.id}`);
     if (!this.id) {
       console.warn("Aucun ID de log disponible. Impossible de mettre à jour le log.");
       return;
