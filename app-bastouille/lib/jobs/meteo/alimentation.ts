@@ -15,7 +15,7 @@ async function main() {
   const yesterday = subDays(new Date(), 1);
   const dateStr = format(yesterday, "yyyy-MM-dd");
 
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,uv_index_max,sunrise,sunset,windspeed_10m_max,sunshine_duration,relative_humidity_2m_mean&timezone=auto&start_date=${dateStr}&end_date=${dateStr}`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,uv_index_max,sunrise,sunset,windspeed_10m_max,sunshine_duration,relative_humidity_2m_mean,weathercode&timezone=auto&start_date=${dateStr}&end_date=${dateStr}`;
 
   type OpenMeteoDailyResponse = {
     daily: {
@@ -28,6 +28,7 @@ async function main() {
       windspeed_10m_max: number[];
       sunshine_duration: number[];
       relative_humidity_2m_mean: number[];
+      weathercode: number[];
     };
   };
   let json;
@@ -82,6 +83,7 @@ async function main() {
       windspeed_10m_max: number[];
       sunshine_duration: number[];
       relative_humidity_2m_mean: number[];
+      weathercode: number[];
     };
   };
   const day = data.daily;
@@ -99,6 +101,7 @@ async function main() {
         vent: day.windspeed_10m_max[0],
         sunshine: day.sunshine_duration[0] / 3600,
         humidite: day.relative_humidity_2m_mean[0],
+        weather_code: day.weathercode[0],
         source: "Open-Meteo"
       },
     });

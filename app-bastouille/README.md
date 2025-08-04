@@ -21,6 +21,34 @@
 ### 4. Composants techniques
 - [4.1 API REST](#41-api-rest)
 - [4.2 Prisma ORM et base de données](#42-prisma-orm-et-base-de-données)
+  
+Le projet utilise Prisma comme ORM pour interagir avec la base de données PostgreSQL.
+
+#### 💡 Principales commandes Prisma
+
+| Commande                         | Usage                  | Crée Migration | Applique Migration | Génère Client | Interactif | Crée DB |
+|----------------------------------|------------------------|----------------|---------------------|----------------|------------|---------|
+| `npx prisma migrate dev`         | 🧪 Développement local | ✅              | ✅                   | ✅              | ✅          | ✅       |
+| `npx prisma migrate deploy`      | 🚀 Production           | ❌              | ✅                   | ❌              | ❌          | ❌       |
+| `npx prisma generate`            | 🔄 Génère client seul   | ❌              | ❌                   | ✅              | ❌          | ❌       |
+
+#### 📘 Détails
+
+- `prisma migrate dev` :
+  - Crée une nouvelle migration à partir du schéma (`schema.prisma`)
+  - Applique cette migration à la base locale
+  - Met à jour le client Prisma automatiquement
+  - À utiliser uniquement en environnement de développement
+
+- `prisma migrate deploy` :
+  - Applique les fichiers de migration existants à une base de données cible (ex. en production)
+  - Ne génère pas de migration
+  - Ne met pas à jour automatiquement le client Prisma
+
+- `prisma generate` :
+  - Génère manuellement le client Prisma, à utiliser après une migration ou si le client a été supprimé (`rm -rf node_modules/@prisma/client`)
+
+---
 - [4.3 Système de Jobs (alimentation météo)](#43-système-de-jobs-(alimentation-météo))
 - [4.4 Thème et dark mode](#44-thème-et-dark-mode)
 - [4.5 Composants UI (shadcn/ui, Tailwind)](#45-composants-ui-(shadcn/ui,-tailwind))

@@ -67,6 +67,7 @@ model meteo_jour {
   sunrise         DateTime
   sunset          DateTime
   source          String   @default("Open-Meteo")
+  weather_code    Int
 }
 
 model log_jobs {
