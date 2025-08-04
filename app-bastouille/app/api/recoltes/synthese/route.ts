@@ -12,10 +12,6 @@ export async function GET(req: Request) {
   const month = now.getMonth() + 1;
   const week = getISOWeekNumber(now);
 
-  console.log( "/api/recoltes/cumuls year : ", year);  
-  console.log( "/api/recoltes/cumuls month: ", month);
-  console.log( "/api/recoltes/cumuls week : ", week);
-
   const limit = limitParam ? parseInt(limitParam, 10) : 20;
   const order = orderParam === "asc" ? "asc" : "desc";
 
@@ -68,8 +64,6 @@ export async function GET(req: Request) {
     };
   });
 
-  console.log("/api/recoltes/cumuls resu : ");
-  console.log(JSON.stringify(enriched));
 
   return NextResponse.json(enriched);
 }

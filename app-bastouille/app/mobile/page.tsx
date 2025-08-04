@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
+import CultureSelector from "@/components/CultureSelector";
 
 export default function MobilePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -21,7 +22,7 @@ export default function MobilePage() {
   }, [theme]);
 
   useEffect(() => {
-    fetch(`/api/recoltes/cumuls?limit=5&periode=${selectedPeriode}`)
+    fetch(`/api/recoltes/synthese?limit=4&periode=${selectedPeriode}`)
       .then((res) => res.json())
       .then((data) => {
         const top5 = data
@@ -56,7 +57,7 @@ export default function MobilePage() {
             <button
               key={periode}
               onClick={() => setSelectedPeriode(periode as "semaine" | "mois" | "annee")}
-              className={`flex-1 text-center px-3 py-1 rounded-full text-xs font-semibold ${
+              className={`flex-1 text-center px-3 py-2 rounded-full text-xs font-semibold ${
                 selectedPeriode === periode
                   ? "bg-[var(--color-accent)] text-[var(--color-base)]"
                   : "bg-[var(--color-muted)] text-[var(--color-text)]"
@@ -107,32 +108,12 @@ export default function MobilePage() {
             form.reset();
           }}
         >
-          {selectedCulture && (
-            <div className="flex items-center gap-2">
-              <img
-                src={`/images/cultures/${selectedCulture.img}`}
-                alt={selectedCulture.nom}
-                className="w-16 h-16 object-contain"
-              />
-              <span className="text-lg font-semibold">{selectedCulture.nom}</span>
-            </div>
-          )}
-          <select
-            name="culture"
-            value={selectedCultureId}
-            onChange={(e) => setSelectedCultureId(e.target.value)}
-            className="px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] font-sans"
-          >
-            {cultures.map((culture) => (
-              <option
-                key={culture.id}
-                value={culture.id}
-                dangerouslySetInnerHTML={{
-                  __html: `<img src="/images/cultures/${culture.img}" width="20" height="20" style="vertical-align:middle; margin-right:4px;" /> ${culture.nom}`,
-                }}
-              />
-            ))}
-          </select>
+          <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
+            <CultureSelector
+              value={selectedCultureId}
+              onChange={setSelectedCultureId}
+            />
+          </div>
 
           <div className="flex gap-2 w-full max-w-sm">
             <input
@@ -143,15 +124,13 @@ export default function MobilePage() {
               className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
               required
             />
-            {selectedCulture?.mode_recolte === "poids_unite" && (
-              <input
-                name="quantite"
-                type="number"
-                placeholder="Unités"
-                className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
-                required
-              />
-            )}
+            <input
+              name="quantite"
+              type="number"
+              placeholder="Unités"
+              className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
+              disabled={selectedCulture?.mode_recolte !== "poids_unite"}
+            />
           </div>
 
           <button
@@ -166,7 +145,7 @@ export default function MobilePage() {
             type="submit"
             className="px-6 py-3 rounded-full bg-[var(--color-accent)] hover:brightness-90 text-[var(--color-base)] font-semibold shadow"
           >
-            + Ajouter la récolte
+            '+ Ajouter la récolte
           </button>
         </form>
       </div>
