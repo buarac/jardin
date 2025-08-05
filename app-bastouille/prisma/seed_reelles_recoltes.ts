@@ -1,6 +1,3 @@
-
-
-
 import { PrismaClient } from "@prisma/client";
 import { parse } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -8,79 +5,7 @@ import { fr } from "date-fns/locale";
 const prisma = new PrismaClient();
 
 const recoltesDataRaw = `
-1-mai-25	Fraise	420
-3-mai-25	Fraise	504
-5-mai-25	Fraise	326
-7-mai-25	Fraise	218
-11-mai-25	Fraise	691
-12-mai-25	Fraise	695
-14-mai-25	Fraise	740
-18-mai-25	Fraise	896
-21-mai-25	Fraise	576
-7-juin-25	Framboise	100
-7-juin-25	Fraise	200
-8-juin-25	Framboise	100
-10-juin-25	Fraise	100
-11-juin-25	Framboise	285
-16-juin-25	Framboise	1242
-16-juin-25	Fraise	208
-16-juin-25	Framboise	1600
-18-juin-25	Framboise	702,5
-21-juin-25	Framboise	1030
-22-juin-25	Framboise	661
-23-juin-25	Framboise	385
-24-juin-25	Framboise	716
-24-juin-25	Fraise	150
-26-juin-25	Framboise	683
-27-juin-25	Framboise	529
-27-juin-25	Pomme de terre	440
-28-juin-25	Framboise	593
-30-juin-25	Framboise	572
-30-juin-25	Fraise	416
-2-juil.-25	Framboise	327
-2-juil.-25	Fraise	435
-3-juil.-25	Tomate	63,5
-4-juil.-25	Pomme de terre	1076
-4-juil.-25	Framboise	369
-6-juil.-25	Fraise	500
-8-juil.-25	Haricot Vert	186
-9-juil.-25	Framboise	191
-9-juil.-25	Haricot Vert	45
-9-juil.-25	Pomme de terre	1172
-9-juil.-25	Betterave	225
-11-juil.-25	Fraise	563
-13-juil.-25	Tomate	231
-13-juil.-25	Tomate Cerise	50
-13-juil.-25	Concombre	450
-13-juil.-25	Haricot Vert	323
-13-juil.-25	Fraise	172
-15-juil.-25	Betterave	196
-15-juil.-25	Carotte	145
-14-juil.-25	Tomate Cerise	30
-19-juil.-25	Fraise	254
-19-juil.-25	Mûre	44
-16-juil.-25	Fraise	254
-21-juil.-25	Pomme de terre	1700
-22-juil.-25	Haricot Vert	466
-22-juil.-25	Tomate	845
-22-juil.-25	Concombre	283
-22-juil.-25	Courgette	829
-25-juil.-25	Fraise	247
-25-juil.-25	Tomate	821
-27-juil.-25	Tomate	1241
-27-juil.-25	Concombre	408
-28-juil.-25	Tomate	240
-30-juil.-25	Tomate	3774
-30-juil.-25	Courgette	456
-30-juil.-25	Concombre	1111
-30-juil.-25	Haricot Vert	520
-1-août-25	Tomate	448
-2-août-25	Mûre	120
-3-août-25	Fraise	276
-4-août-25	Tomate Cerise	170
-4-août-25	Tomate	95
-4-août-25	Concombre	953
-4-août-25	Oignon	30
+Date	Fruit/Legume	Poids(g)
 24-mai-24	Fraise	610
 26-mai-24	Fraise	1214
 28-mai-24	Fraise	959
@@ -150,6 +75,79 @@ const recoltesDataRaw = `
 5-oct.-24	Tomate Cerise	3600
 5-oct.-24	Poivron	365
 24-oct.-24	Tomate	1700
+1-mai-25	Fraise	420
+3-mai-25	Fraise	504
+5-mai-25	Fraise	326
+7-mai-25	Fraise	218
+11-mai-25	Fraise	691
+12-mai-25	Fraise	695
+14-mai-25	Fraise	740
+18-mai-25	Fraise	896
+21-mai-25	Fraise	576
+7-juin-25	Framboise	100
+7-juin-25	Fraise	200
+8-juin-25	Framboise	100
+10-juin-25	Fraise	100
+11-juin-25	Framboise	285
+16-juin-25	Framboise	1242
+16-juin-25	Fraise	208
+16-juin-25	Framboise	1600
+18-juin-25	Framboise	702,5
+21-juin-25	Framboise	1030
+22-juin-25	Framboise	661
+23-juin-25	Framboise	385
+24-juin-25	Framboise	716
+24-juin-25	Fraise	150
+26-juin-25	Framboise	683
+27-juin-25	Framboise	529
+27-juin-25	Pomme de terre	440
+28-juin-25	Framboise	593
+30-juin-25	Framboise	572
+30-juin-25	Fraise	416
+2-juil.-25	Framboise	327
+2-juil.-25	Fraise	435
+3-juil.-25	Tomate	63,5
+4-juil.-25	Pomme de terre	1076
+4-juil.-25	Framboise	369
+6-juil.-25	Fraise	500
+8-juil.-25	Haricot vert	186
+9-juil.-25	Framboise	191
+9-juil.-25	Haricot vert	45
+9-juil.-25	Pomme de terre	1172
+9-juil.-25	Betterave	225
+11-juil.-25	Fraise	563
+13-juil.-25	Tomate	231
+13-juil.-25	Tomate Cerise	50
+13-juil.-25	Concombre	450
+13-juil.-25	Haricot vert	323
+13-juil.-25	Fraise	172
+14-juil.-25	Tomate Cerise	30
+15-juil.-25	Betterave	196
+15-juil.-25	Carotte	145
+16-juil.-25	Fraise	254
+19-juil.-25	Fraise	254
+19-juil.-25	Mûre	44
+21-juil.-25	Pomme de terre	1700
+22-juil.-25	Haricot vert	466
+22-juil.-25	Tomate	845
+22-juil.-25	Concombre	283
+22-juil.-25	Courgette	829
+25-juil.-25	Fraise	247
+25-juil.-25	Tomate	821
+27-juil.-25	Tomate	1241
+27-juil.-25	Concombre	408
+28-juil.-25	Tomate	240
+30-juil.-25	Tomate	3774
+30-juil.-25	Courgette	456
+30-juil.-25	Concombre	1111
+30-juil.-25	Haricot vert	520
+1-août-25	Tomate	448
+2-août-25	Mûre	120
+3-août-25	Fraise	276
+4-août-25	Tomate Cerise	170
+4-août-25	Tomate	95
+4-août-25	Concombre	953
+4-août-25	Oignon	30
 `;
 
 type RecolteRow = {

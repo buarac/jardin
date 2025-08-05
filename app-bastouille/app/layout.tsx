@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" data-mode="dark" data-theme="lavande">
       <head>
         <link rel="manifest" href="manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />

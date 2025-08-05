@@ -110,11 +110,6 @@ export async function POST(request: Request) {
       date,
       poids,
       quantite,
-      temperature,
-      humidite,
-      vent,
-      indice_uv,
-      qte_pluie,
     } = body;
     const parsedDate = date ? new Date(date) : new Date();
     const poidsInt = parseInt(poids);
@@ -126,11 +121,6 @@ export async function POST(request: Request) {
         date: parsedDate,
         poids: poidsInt,
         quantite: quantiteInt,
-        temperature: temperature !== undefined ? parseFloat(temperature) : null,
-        humidite: humidite !== undefined ? parseFloat(humidite) : null,
-        vent: vent !== undefined ? parseFloat(vent) : null,
-        indice_uv: indice_uv !== undefined ? parseFloat(indice_uv) : null,
-        qte_pluie: qte_pluie !== undefined ? parseFloat(qte_pluie) : null,
       },
     });
     return NextResponse.json(recolte, { status: 201 });
