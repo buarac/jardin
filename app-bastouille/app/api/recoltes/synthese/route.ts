@@ -15,7 +15,7 @@ export async function GET(req: Request) {
   const limit = limitParam ? parseInt(limitParam, 10) : 20;
   const order = orderParam === "asc" ? "asc" : "desc";
 
-  if (!periode || !["annee", "mois", "semaine"].includes(periode)) {
+  if (!periode || !["annee", "mois", "semaine", "jour"].includes(periode)) {
     return NextResponse.json({ error: "Invalid periode" }, { status: 400 });
   }
 
@@ -64,7 +64,7 @@ export async function GET(req: Request) {
     };
   });
 
-
+  console.log(JSON.stringify(enriched));
   return NextResponse.json(enriched);
 }
 
@@ -77,6 +77,10 @@ function getPeriodStart(periode: string, year: number, month: number, week: numb
   }
   if (periode === "semaine") {
     return getDateOfISOWeek(week, year);
+  }
+  if (periode === "jour") {
+    const now = new Date();
+    return new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
   }
 }
 
@@ -93,6 +97,12 @@ function getPeriodEnd(periode: string, year: number, month: number, week: number
     const start = getDateOfISOWeek(week, year);
     const end = new Date(start);
     end.setDate(end.getDate() + 7);
+    return end;
+  }
+  if (periode === "jour") {
+    const now = new Date();
+    const end = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+    end.setUTCDate(end.getUTCDate() + 1);
     return end;
   }
 }
