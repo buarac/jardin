@@ -44,7 +44,7 @@ export default function MobilePage() {
   }, [theme]);
 
   useEffect(() => {
-    fetch(`/api/recoltes/synthese?limit=8&periode=${selectedPeriode}`)
+    fetch(`/api/recoltes/synthese?limit=7&periode=${selectedPeriode}`)
       .then((res) => res.json())
       .then((data) => {
         const cumuls = data
