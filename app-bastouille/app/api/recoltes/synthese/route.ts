@@ -64,7 +64,7 @@ export async function GET(req: Request) {
     };
   });
 
-  console.log(JSON.stringify(enriched));
+  //console.log(JSON.stringify(enriched));
   return NextResponse.json(enriched);
 }
 
