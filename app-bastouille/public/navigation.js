@@ -6,7 +6,7 @@ App.Navigation = (function Navigation() {
     var isEnabled = true;
 
     function toggleFocusOnActiveItem() {
-        console.log("toggleFocusOnActiveItem")
+        console.log("toggleFocusOnActiveItem: " + activeMenu.getItems()[activeMenu.getFocusedElemIdx()])
         activeMenu.getItems()[activeMenu.getFocusedElemIdx()].classList.toggle('active');
     }
 
@@ -18,10 +18,11 @@ App.Navigation = (function Navigation() {
             console.warn("⚠️ Aucun menu actif au moment de l'appui sur la touche");
             return;
         }        
-
+        console.log("🧩 activeMenu = ", activeMenu?.name);
+        console.log("event.keyCode = ", event.keyCode);
         switch (event.keyCode) {
             case 39: // right
-                //console.log("RIGHT");
+                console.log("RIGHT");
                 activeMenu.onKeyRight();
                 break;
             case 37: // left
@@ -184,6 +185,11 @@ App.Navigation = (function Navigation() {
                     menu.getItems()[selectedItemIdx].classList.remove('selected');
                     selectedItemIdx = focusedElemIdx;
                     menu.getItems()[selectedItemIdx].classList.add('selected');
+                }
+                // 👉 Simule un clic sur l’élément actuellement focus
+                const activeItem = menu.getItems()[focusedElemIdx];
+                if (activeItem) {
+                    activeItem.click();
                 }
             },
             onKeyReturn: function onKeyReturn() { },

@@ -117,3 +117,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+[data-list-item].active {
+  outline: 2px solid #4ade80; /* vert clair Tailwind */
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+[data-list-item].selected {
+  background-color: #facc15; /* jaune Tailwind */
+}
