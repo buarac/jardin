@@ -1,0 +1,32 @@
+{
+  "model": "log_jobs",
+  "rows": [
+    {
+      "id": 10,
+      "job_name": "export-db",
+      "started_at": "2025-08-07T08:56:38.561Z",
+      "ended_at": "2025-08-07T08:56:38.630Z",
+      "status": "PARTIAL",
+      "message": "20% d'erreur lors de l'export",
+      "log": "[{\"model\":\"log_jobs\",\"filename\":\"/Users/sacha/github/jardin/app-bastouille/exports/07_08_2025/log_jobs.json\"}]"
+    },
+    {
+      "id": 11,
+      "job_name": "export-db",
+      "started_at": "2025-08-07T08:58:03.273Z",
+      "ended_at": "2025-08-07T08:58:03.322Z",
+      "status": "IGNORED",
+      "message": "Export déjà réalisé pour 07_08_2025",
+      "log": null
+    },
+    {
+      "id": 12,
+      "job_name": "export-db",
+      "started_at": "2025-08-07T08:58:17.078Z",
+      "ended_at": null,
+      "status": "PENDING",
+      "message": "Job démarré",
+      "log": null
+    }
+  ]
+}

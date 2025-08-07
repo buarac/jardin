@@ -9,8 +9,7 @@ export async function runJob() {
 
   try {
     await logger.start("exportation_meteo", startJob);
-
-
+    
     let records;
     try {
         records = await prisma.meteo_jour.findMany();

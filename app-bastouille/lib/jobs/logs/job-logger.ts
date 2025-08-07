@@ -24,8 +24,8 @@ export class JobLogger {
     //console.log(`JobLogger started, id = ${this.id}`);
   }
 
-  public async success(message: string) {
-    await this.updateStatus("OK", message);
+  public async success(message: string, logMsg?: string) {
+    await this.updateStatus("OK", message, logMsg ? logMsg : undefined);
   }
 
   public async fail(message: string, error: any) {
@@ -36,8 +36,8 @@ export class JobLogger {
     await this.updateStatus("IGNORED", message, error ? JSON.stringify(error, null, 2) : undefined);
   }
 
-  public async partial(message: string) {
-    await this.updateStatus("PARTIAL", message);
+  public async partial(message: string, logMsg?: string) {
+    await this.updateStatus("PARTIAL", message, logMsg ? logMsg : undefined);
   }
 
   private async updateStatus(

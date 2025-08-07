@@ -1,0 +1,17 @@
+{
+  "model": "recipient",
+  "rows": [
+    {
+      "id": "b1b1c5b5-bdee-4cf0-a4c3-bd26b3a2cc14",
+      "nom": "Plastique noir",
+      "img": "rec_noir.png",
+      "poids": 84
+    },
+    {
+      "id": "c2c2d6d6-ceee-4df1-b4d3-cd37b3a2cc15",
+      "nom": "Bois",
+      "img": "rec_bois.png",
+      "poids": 770
+    }
+  ]
+}

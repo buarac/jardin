@@ -13,7 +13,7 @@ export type ThemeName = "soleil" | "lavande";
  * Mode can be light or dark or follow the system preference. When in
  * system mode we read the `prefers-color-scheme` media query on the client.
  */
-export type ColorMode = "light" | "dark" | "system";
+export type ColorMode = "light" | "dark";
 
 interface ThemeContextType {
   theme: ThemeName;
@@ -32,8 +32,10 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [theme, setThemeState] = useState<ThemeName>("soleil");
-  const [mode, setModeState] = useState<ColorMode>("light");
+  //const [theme, setThemeState] = useState<ThemeName>("soleil");
+  //const [mode, setModeState] = useState<ColorMode>("light");
+  const [theme, setThemeState] = useState<ThemeName>("lavande");
+  const [mode, setModeState] = useState<ColorMode>("dark");
 
   // On mount, read previously stored preferences. Because this runs in a
   // `useEffect` the code only executes on the client which avoids hydration
@@ -52,15 +54,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("theme", theme);
     localStorage.setItem("mode", mode);
     document.documentElement.setAttribute("data-theme", theme);
-    if (mode === "system") {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute(
-        "data-mode",
-        isDark ? "dark" : "light",
-      );
-    } else {
-      document.documentElement.setAttribute("data-mode", mode);
-    }
+    document.documentElement.setAttribute("data-mode", mode);
   }, [theme, mode]);
 
   const setTheme = (t: ThemeName) => setThemeState(t);

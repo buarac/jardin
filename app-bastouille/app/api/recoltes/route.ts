@@ -15,83 +15,59 @@ import { prisma } from "@lib/db";
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const yearParam = searchParams.get("year");
-    const monthParam = searchParams.get("month");
-    const categorie = searchParams.get("categorie");
+    const anneeParam = searchParams.get("annee");
     const cultureId = searchParams.get("cultureId");
-    const periode = searchParams.get("periode");
+    const groupby = searchParams.get("groupby");
+
+    if (!cultureId) {
+      return NextResponse.json([], { status: 200});
+    }
 
     const now = new Date();
-    let start: Date | undefined;
-    let end: Date | undefined;
+    const annee = anneeParam ? parseInt(anneeParam, 10) : now.getFullYear();
 
-    // Gestion du paramètre "periode"
-    if (periode) {
-      if (periode === "annee") {
-        start = new Date(now.getFullYear(), 0, 1);
-        start.setHours(0, 0, 0, 0);
-        end = new Date(now.getFullYear() + 1, 0, 1);
-      } else if (periode === "mois") {
-        start = new Date(now.getFullYear(), now.getMonth(), 1);
-        start.setHours(0, 0, 0, 0);
-        end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-      } else if (periode === "semaine") {
-        const current = new Date();
-        current.setHours(0, 0, 0, 0);
-        start = new Date(current);
-        start.setDate(current.getDate() - 6); // inclut aujourd'hui
-        end = new Date(current);
-        end.setDate(current.getDate() + 1); // inclut toute la journée d'aujourd'hui
-        end.setHours(0, 0, 0, 0);
-      }
-    } else if (yearParam || monthParam) {
-      const year = parseInt(yearParam || now.getFullYear().toString());
-      const month = monthParam ? parseInt(monthParam) - 1 : 0;
+    const start = new Date(Date.UTC(annee, 0, 1));
+    const end = new Date(Date.UTC(annee + 1, 0, 1));
 
-      start = new Date(Date.UTC(year, month, 1));
-      start.setHours(0, 0, 0, 0);
-      end = monthParam
-        ? new Date(Date.UTC(year, month + 1, 1))
-        : new Date(Date.UTC(year + 1, 0, 1));
-    }
+    if (groupby === "jour" || groupby === "semaine" || groupby === "mois") {
+      // Utilisation de Prisma + raw SQL pour groupement dynamique
+      const format =
+        groupby === "jour"
+          ? "%Y-%m-%d"
+          : groupby === "mois"
+          ? "%Y-%m"
+          : "%Y-%u"; // semaine ISO
 
-    const where: any = {};
-    if (start && end) {
-      where.date = { gte: start, lt: end };
+      const results = await prisma.$queryRaw`
+        SELECT 
+          to_char(date, ${format}) as periode,
+          SUM(poids) as poids
+        FROM recolte
+        WHERE id_culture = "${cultureId}"
+          AND date >= ${start}
+          AND date < ${end}
+        GROUP BY periode
+        ORDER BY periode ASC;
+      `;
+      return NextResponse.json(results);
+    } else {
+      // Renvoie brute sans groupement
+      const results = await prisma.recolte.findMany({
+        where: {
+          id_culture: cultureId,
+          date: {
+            gte: start,
+            lt: end,
+          },
+        },
+        orderBy: { date: "asc" },
+      });
+      return NextResponse.json(results);
     }
-    if (categorie) {
-      where.culture = { categorie };
-    }
-    if (cultureId) {
-      where.id_culture = cultureId;
-    }
-    const limitParam = searchParams.get("limit");
-    const take = limitParam ? parseInt(limitParam) : undefined;
-    const recoltes = await prisma.recolte.groupBy({
-      by: ["id_culture"],
-      where,
-      _sum: {
-        poids: true,
-      },
-    });
-
-    const enriched = await Promise.all(
-      recoltes.map(async (r) => {
-        const culture = await prisma.culture.findUnique({
-          where: { id: r.id_culture },
-        });
-        return {
-          id_culture: r.id_culture,
-          poids: r._sum.poids ?? 0,
-          culture,
-        };
-      })
-    );
-    return NextResponse.json(enriched);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch recoltes" },
+      { error: "Erreur lors de la récupération des récoltes" },
       { status: 500 },
     );
   }

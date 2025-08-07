@@ -8,8 +8,8 @@ export default function MobilePage() {
   // const [isDarkMode, setIsDarkMode] = useState(true);
   // const [theme, setTheme] = useState<"soleil" | "lavande">("lavande");
   const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => {
-      setIsMounted(true);
+  useEffect(() => {
+    setIsMounted(true);
   }, []);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [theme, setTheme] = useState<"soleil" | "lavande">("soleil");
@@ -29,6 +29,8 @@ export default function MobilePage() {
 
   const [openZone, setOpenZone] = useState<1 | 2 | null>(2);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     fetch("/api/recipients")
       .then((res) => res.json())
@@ -44,7 +46,7 @@ export default function MobilePage() {
   }, [theme]);
 
   useEffect(() => {
-    fetch(`/api/recoltes/synthese?limit=7&periode=${selectedPeriode}`)
+    fetch(`/api/recoltes/synthese?limit=5&periode=${selectedPeriode}`)
       .then((res) => res.json())
       .then((data) => {
         const cumuls = data
@@ -68,6 +70,9 @@ export default function MobilePage() {
   }, []);
 
   if (!isMounted) return null;
+
+  const maxPoids = Math.max(...recoltesCumulees.map(item => item.poids), 1);
+
   return (
     <div className="min-h-screen bg-[var(--color-base)] text-[var(--color-text)] p-4 space-y-2 font-sans">
 
@@ -81,9 +86,8 @@ export default function MobilePage() {
             onClick={() => setIsDarkMode((prev) => !prev)}
           >
             <div
-              className={`absolute top-0.5 w-7 h-7 rounded-full shadow-md flex items-center justify-center transition-all duration-300 ${
-                isDarkMode ? "left-6 bg-black text-white" : "left-0.5 bg-white text-yellow-500"
-              }`}
+              className={`absolute top-0.5 w-7 h-7 rounded-full shadow-md flex items-center justify-center transition-all duration-300 ${isDarkMode ? "left-6 bg-black text-white" : "left-0.5 bg-white text-yellow-500"
+                }`}
             >
               {isDarkMode ? "🌙" : "☀️"}
             </div>
@@ -102,11 +106,10 @@ export default function MobilePage() {
             onClick={() => setTheme((prev) => (prev === "soleil" ? "lavande" : "soleil"))}
           >
             <div
-              className={`absolute top-0.5 w-7 h-7 rounded-full shadow-md flex items-center justify-center transition-all duration-300 ${
-                theme === "soleil"
+              className={`absolute top-0.5 w-7 h-7 rounded-full shadow-md flex items-center justify-center transition-all duration-300 ${theme === "soleil"
                   ? "left-0.5 bg-white text-yellow-500"
                   : "left-6 bg-white text-indigo-300"
-              }`}
+                }`}
             >
               {theme === "soleil" ? "🌞" : "🌿"}
             </div>
@@ -131,11 +134,10 @@ export default function MobilePage() {
                 <button
                   key={periode}
                   onClick={() => setSelectedPeriode(periode as "semaine" | "mois" | "annee")}
-                  className={`flex-1 text-center px-3 py-2 rounded-full text-xs font-semibold ${
-                    selectedPeriode === periode
+                  className={`flex-1 text-center px-3 py-2 rounded-full text-xs font-semibold ${selectedPeriode === periode
                       ? "bg-[var(--color-accent)] text-[var(--color-base)]"
                       : "bg-[var(--color-muted)] text-[var(--color-text)]"
-                  }`}
+                    }`}
                 >
                   {periode[0].toUpperCase() + periode.slice(1)}
                 </button>
@@ -152,13 +154,17 @@ export default function MobilePage() {
                 {recoltesCumulees.map((item, index) => (
                   <tr key={index} className="bg-[var(--color-card)] rounded-md">
                     <td className="p-2">
-                      <img
-                        src={`/images/cultures/${item.img}`}
-                        alt={item.nom}
-                        className="mr-2 inline-block w-8 h-8 object-contain"
-                      />
-                      {item.nom}
-                    </td> 
+                      <div className="inline-flex items-center justify-start gap-3">
+                        {/*<div className="w-14 h-14 rounded-full bg-[var(--color-muted)] flex items-center justify-center">*/}
+                        <img
+                          src={`/images/cultures/${item.img}`}
+                          alt={item.nom}
+                          className="w-12 h-12 object-contain"
+                        />
+                        {/* </div> */}
+                        <span className="text-sm font-medium">{item.nom}</span>
+                      </div>
+                    </td>
                     <td className="p-2 font-medium">{(item.poids / 1000).toFixed(2)} kg</td>
                   </tr>
                 ))}
@@ -178,101 +184,106 @@ export default function MobilePage() {
           {openZone === 2 ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
         {openZone === 2 && (
-          <div className="p-4 pt-0">
-            <div className="p-4 pt-2 flex flex-col items-center justify-center gap-4">
-              <form
-                className="flex flex-col gap-2 w-full max-w-sm"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const form = e.currentTarget;
-                  const formData = new FormData(form);
-                  const poids = formData.get("poids")?.toString() ?? "";
-                  const quantite = formData.get("quantite")?.toString() ?? "";
-                  const recipient = recipients.find((r) => r.id === selectedRecipientId);
-                  const poidsBrut = parseFloat(poids);
-                  const poidsNet = recipient ? Math.max(0, poidsBrut - recipient.poids) : poidsBrut;
-                  const now = new Date();
-                  now.setHours(11, 0, 0, 0);
+          <div className="p-4 pt-2 flex flex-col items-center justify-center gap-4">
+            <form
+              className="flex flex-col gap-2 w-full"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const formData = new FormData(form);
+                const poids = formData.get("poids")?.toString() ?? "";
+                const quantite = formData.get("quantite")?.toString() ?? "";
+                const recipient = recipients.find((r) => r.id === selectedRecipientId);
+                const poidsBrut = parseFloat(poids);
+                const poidsNet = recipient ? Math.max(0, poidsBrut - recipient.poids) : poidsBrut;
+                const now = new Date();
+                now.setHours(11, 0, 0, 0);
 
-                  fetch("/api/recoltes", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      id_culture: selectedCulture?.id,
-                      date: now.toISOString(),
-                      poids: poidsNet,
-                      quantite: 0,
-                      quantite_fiable: false,
-                      recipient_id: recipient?.id ?? null,
-                    }),
+                setIsSubmitting(true);
+
+                fetch("/api/recoltes", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    id_culture: selectedCulture?.id,
+                    date: now.toISOString(),
+                    poids: poidsNet,
+                    quantite: 0,
+                    quantite_fiable: false,
+                    recipient_id: recipient?.id ?? null,
+                  }),
+                })
+                  .then(async (res) => {
+                    if (!res.ok) {
+                      const error = await res.text();
+                      throw new Error(error);
+                    }
+                    alert("✅ Récolte enregistrée avec succès !");
+                    setIsSubmitting(false);
                   })
-                    .then(async (res) => {
-                      if (!res.ok) {
-                        const error = await res.text();
-                        throw new Error(error);
-                      }
-                      alert("✅ Récolte enregistrée avec succès !");
-                    })
-                    .catch((err) => {
-                      console.error(err);
-                      alert("❌ Erreur lors de l'enregistrement de la récolte.");
-                    });
-                  form.reset();
-                }}
+                  .catch((err) => {
+                    console.error(err);
+                    alert("❌ Erreur lors de l'enregistrement de la récolte.");
+                    setIsSubmitting(false);
+                  });
+                form.reset();
+              }}
+            >
+              <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
+                <CultureSelector
+                  value={selectedCultureId}
+                  onChange={setSelectedCultureId}
+                />
+              </div>
+
+              <div className="flex gap-2 w-full">
+                <input
+                  name="poids"
+                  type="number"
+                  step="1"
+                  inputMode="numeric"
+                  placeholder="Poids (g)"
+                  className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
+                  required
+                />
+                <input
+                  name="quantite"
+                  type="number"
+                  inputMode="numeric"
+                  placeholder="Unités"
+                  className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
+                  disabled={selectedCulture?.mode_recolte !== "poids_unite"}
+                />
+              </div>
+
+              <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
+                <RecipientSelector
+                  value={selectedRecipientId}
+                  onChange={setSelectedRecipientId}
+                />
+              </div>
+
+              <button
+                type="button"
+                className="px-6 py-2 rounded-full border border-dashed border-[var(--color-text)] text-sm"
+                onClick={() => alert("Prise de photo pas encore implémentée")}
               >
-                <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
-                  <CultureSelector
-                    value={selectedCultureId}
-                    onChange={setSelectedCultureId}
-                  />
-                </div>
+                📸 Prendre une photo
+              </button>
 
-                <div className="flex gap-2 w-full max-w-sm">
-                  <input
-                    name="poids"
-                    type="number"
-                    step="1"
-                    placeholder="Poids (g)"
-                    className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
-                    required
-                  />
-                  <input
-                    name="quantite"
-                    type="number"
-                    placeholder="Unités"
-                    className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
-                    disabled={selectedCulture?.mode_recolte !== "poids_unite"}
-                  />
-                </div>
-
-                <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
-                  <RecipientSelector
-                    value={selectedRecipientId}
-                    onChange={setSelectedRecipientId}
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  className="px-6 py-2 rounded-full border border-dashed border-[var(--color-text)] text-sm"
-                  onClick={() => alert("Prise de photo pas encore implémentée")}
-                >
-                  📸 Prendre une photo
-                </button>
-
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-full bg-[var(--color-accent)] hover:brightness-90 text-[var(--color-base)] font-semibold shadow"
-                >
-                  '+ Ajouter la récolte
-                </button>
-              </form>
-            </div>
+              <button
+                type="submit"
+                className="px-6 py-3 rounded-full bg-[var(--color-accent)] hover:brightness-90 text-[var(--color-base)] font-semibold shadow disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "⏳ Ajout en cours..." : "+ Ajouter la récolte"}
+              </button>
+            </form>
           </div>
         )}
       </div>
     </div>
   );
-}
+} 

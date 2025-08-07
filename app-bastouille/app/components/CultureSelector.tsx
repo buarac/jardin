@@ -30,17 +30,17 @@ export default function CultureSelector({ value, onChange }: CultureSelectorProp
     <div className="w-full">
       <Listbox value={selectedCulture} onChange={(c: Culture) => onChange(c.id)}>
         <div className="relative">
-          <Listbox.Button className="relative w-full h-10 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
-            <div className="flex items-center gap-2">
+          <Listbox.Button className="relative w-full h-14 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
+            <div className="flex items-center gap-3">
               {selectedCulture ? (
-                <>
+                <div className="flex items-center gap-3">
                   <img
                     src={`/images/cultures/${selectedCulture.img}`}
                     alt={selectedCulture.nom}
-                    className="h-6 w-6 object-contain"
+                    className="h-14 w-14 object-contain"
                   />
-                  <span>{selectedCulture.nom}</span>
-                </>
+                  <span className="text-lg leading-tight">{selectedCulture.nom}</span>
+                </div>
               ) : (
                 <span className="text-[var(--color-text-muted)]">Sélectionner une culture</span>
               )}
@@ -55,12 +55,12 @@ export default function CultureSelector({ value, onChange }: CultureSelectorProp
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[var(--color-card)] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+            <Listbox.Options className="absolute mt-1 max-h-96 w-full overflow-auto rounded-md bg-[var(--color-card)] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
               {cultures.map((culture) => (
                 <Listbox.Option
                   key={culture.id}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    `relative cursor-default select-none py-[13px] pl-10 pr-4 ${
                       active ? "bg-[var(--color-accent)] text-white" : "text-[var(--color-text)]"
                     }`
                   }
@@ -68,15 +68,15 @@ export default function CultureSelector({ value, onChange }: CultureSelectorProp
                 >
                   {({ selected }) => (
                     <>
-                      <span className="absolute left-2 top-1/2 transform -translate-y-1/2">
+                      <span className="absolute left-2 top-1/2 -translate-y-1/2 transform">
                         <img
                           src={`/images/cultures/${culture.img}`}
                           alt={culture.nom}
-                          className="h-6 w-6 rounded-full object-cover"
+                          className="h-12 w-12 rounded-full object-cover"
                         />
                       </span>
                       <span
-                        className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
+                        className={`block truncate ${selected ? "font-medium" : "font-normal"} ml-16 text-lg leading-tight`}
                       >
                         {culture.nom}
                       </span>

@@ -1,0 +1,1165 @@
+{
+  "model": "recolte",
+  "rows": [
+    {
+      "id": 825,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-05-24T09:00:00.000Z",
+      "poids": 610,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 826,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-05-26T09:00:00.000Z",
+      "poids": 1214,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 827,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-05-28T09:00:00.000Z",
+      "poids": 959,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 828,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-05-31T09:00:00.000Z",
+      "poids": 1150,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 829,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-06-02T09:00:00.000Z",
+      "poids": 1160,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 830,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-06-04T09:00:00.000Z",
+      "poids": 596,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 831,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-06-09T09:00:00.000Z",
+      "poids": 390,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 832,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-18T09:00:00.000Z",
+      "poids": 49,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 833,
+      "id_culture": "c5b4c6d7-8e9e-4a2e-8e17-6e7b2f4c3a9d",
+      "date": "2024-06-18T09:00:00.000Z",
+      "poids": 228,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 834,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-20T09:00:00.000Z",
+      "poids": 130,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 835,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-21T09:00:00.000Z",
+      "poids": 220,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 836,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-23T09:00:00.000Z",
+      "poids": 296,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 837,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-24T09:00:00.000Z",
+      "poids": 255,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 838,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-28T09:00:00.000Z",
+      "poids": 214,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 839,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-06-29T09:00:00.000Z",
+      "poids": 130,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 840,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-01T09:00:00.000Z",
+      "poids": 417,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 841,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-07-05T09:00:00.000Z",
+      "poids": 475,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 842,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-05T09:00:00.000Z",
+      "poids": 506,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 843,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-08T09:00:00.000Z",
+      "poids": 246,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 844,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-07-08T09:00:00.000Z",
+      "poids": 306,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 845,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-11T09:00:00.000Z",
+      "poids": 467,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 846,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-14T09:00:00.000Z",
+      "poids": 268,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 847,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-07-14T09:00:00.000Z",
+      "poids": 457,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 848,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-17T09:00:00.000Z",
+      "poids": 406,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 849,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-17T09:00:00.000Z",
+      "poids": 341,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 850,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-07-18T09:00:00.000Z",
+      "poids": 253,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 851,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-20T09:00:00.000Z",
+      "poids": 1440,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 852,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-22T09:00:00.000Z",
+      "poids": 534,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 853,
+      "id_culture": "d4d2e5f6-08e1-4c1e-8e25-4e5d0b3e1f7a",
+      "date": "2024-07-22T09:00:00.000Z",
+      "poids": 101,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 854,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2024-07-22T09:00:00.000Z",
+      "poids": 195,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 855,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-23T09:00:00.000Z",
+      "poids": 566,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 856,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-24T09:00:00.000Z",
+      "poids": 1423,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 857,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-07-24T09:00:00.000Z",
+      "poids": 114,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 858,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-25T09:00:00.000Z",
+      "poids": 2264,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 859,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-07-28T09:00:00.000Z",
+      "poids": 126,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 860,
+      "id_culture": "d4d2e5f6-08e1-4c1e-8e25-4e5d0b3e1f7a",
+      "date": "2024-07-28T09:00:00.000Z",
+      "poids": 75,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 861,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-30T09:00:00.000Z",
+      "poids": 943,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 862,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-07-31T09:00:00.000Z",
+      "poids": 265,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 863,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-02T09:00:00.000Z",
+      "poids": 300,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 864,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-03T09:00:00.000Z",
+      "poids": 165,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 865,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-08-03T09:00:00.000Z",
+      "poids": 300,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 866,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-05T09:00:00.000Z",
+      "poids": 345,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 867,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-08-08T09:00:00.000Z",
+      "poids": 400,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 868,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-10T09:00:00.000Z",
+      "poids": 1000,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 869,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-12T09:00:00.000Z",
+      "poids": 1906,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 870,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-08-12T09:00:00.000Z",
+      "poids": 307,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 871,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-15T09:00:00.000Z",
+      "poids": 1507,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 872,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-16T09:00:00.000Z",
+      "poids": 7500,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 873,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-21T09:00:00.000Z",
+      "poids": 550,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 874,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-23T09:00:00.000Z",
+      "poids": 400,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 875,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-26T09:00:00.000Z",
+      "poids": 425,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 876,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-08-26T09:00:00.000Z",
+      "poids": 525,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 877,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-08-30T09:00:00.000Z",
+      "poids": 250,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 878,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-08-30T09:00:00.000Z",
+      "poids": 450,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 879,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-09-01T09:00:00.000Z",
+      "poids": 415,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 880,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-09-01T09:00:00.000Z",
+      "poids": 100,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 881,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-09-06T09:00:00.000Z",
+      "poids": 725,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 882,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-09-13T09:00:00.000Z",
+      "poids": 1481,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 883,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-09-13T09:00:00.000Z",
+      "poids": 1350,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 884,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-09-18T09:00:00.000Z",
+      "poids": 2000,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 885,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-09-18T09:00:00.000Z",
+      "poids": 240,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 886,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2024-09-18T09:00:00.000Z",
+      "poids": 124,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 887,
+      "id_culture": "e5b2c5d6-a2e1-4a2e-8e35-4e5b0d3f1e7a",
+      "date": "2024-09-28T09:00:00.000Z",
+      "poids": 1762,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 888,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-09-29T09:00:00.000Z",
+      "poids": 1900,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 889,
+      "id_culture": "e5b2c5d6-a2e1-4a2e-8e35-4e5b0d3f1e7a",
+      "date": "2024-10-04T09:00:00.000Z",
+      "poids": 1904,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 890,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-10-05T09:00:00.000Z",
+      "poids": 520,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 891,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2024-10-05T09:00:00.000Z",
+      "poids": 3600,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 892,
+      "id_culture": "e4a1b4c5-91eb-4f1e-9e34-3e4a9e2b0c6d",
+      "date": "2024-10-05T09:00:00.000Z",
+      "poids": 365,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 893,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2024-10-24T09:00:00.000Z",
+      "poids": 1700,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 894,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-01T09:00:00.000Z",
+      "poids": 420,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 895,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-03T09:00:00.000Z",
+      "poids": 504,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 896,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-05T09:00:00.000Z",
+      "poids": 326,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 897,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-07T09:00:00.000Z",
+      "poids": 218,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 898,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-11T09:00:00.000Z",
+      "poids": 691,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 899,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-12T09:00:00.000Z",
+      "poids": 695,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 900,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-14T09:00:00.000Z",
+      "poids": 740,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 901,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-18T09:00:00.000Z",
+      "poids": 896,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 902,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-05-21T09:00:00.000Z",
+      "poids": 576,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 903,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-07T09:00:00.000Z",
+      "poids": 100,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 904,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-06-07T09:00:00.000Z",
+      "poids": 200,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 905,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-08T09:00:00.000Z",
+      "poids": 100,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 906,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-06-10T09:00:00.000Z",
+      "poids": 100,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 907,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-11T09:00:00.000Z",
+      "poids": 285,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 908,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-16T09:00:00.000Z",
+      "poids": 1242,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 909,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-06-16T09:00:00.000Z",
+      "poids": 208,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 910,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-16T10:00:00.000Z",
+      "poids": 1600,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 911,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-18T09:00:00.000Z",
+      "poids": 703,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 912,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-21T09:00:00.000Z",
+      "poids": 1030,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 913,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-22T09:00:00.000Z",
+      "poids": 661,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 914,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-23T09:00:00.000Z",
+      "poids": 385,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 915,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-24T09:00:00.000Z",
+      "poids": 716,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 916,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-06-24T09:00:00.000Z",
+      "poids": 150,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 917,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-26T09:00:00.000Z",
+      "poids": 683,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 918,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-27T09:00:00.000Z",
+      "poids": 529,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 919,
+      "id_culture": "e6c3d6e7-b3e1-4b3e-9e36-5e6c1e4a2b8f",
+      "date": "2025-06-27T09:00:00.000Z",
+      "poids": 440,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 920,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-28T09:00:00.000Z",
+      "poids": 593,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 921,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-06-30T09:00:00.000Z",
+      "poids": 572,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 922,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-06-30T09:00:00.000Z",
+      "poids": 416,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 923,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-07-02T09:00:00.000Z",
+      "poids": 327,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 924,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-02T09:00:00.000Z",
+      "poids": 435,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 925,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-03T09:00:00.000Z",
+      "poids": 64,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 926,
+      "id_culture": "e6c3d6e7-b3e1-4b3e-9e36-5e6c1e4a2b8f",
+      "date": "2025-07-04T09:00:00.000Z",
+      "poids": 1076,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 927,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-07-04T09:00:00.000Z",
+      "poids": 369,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 928,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-06T09:00:00.000Z",
+      "poids": 500,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 929,
+      "id_culture": "d1a9b2c3-d5ef-4f7e-9e22-1e2a7e9b8f4d",
+      "date": "2025-07-08T09:00:00.000Z",
+      "poids": 186,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 930,
+      "id_culture": "c9f8a1b2-c4ee-4e6e-8e21-0e1f6d8a7e3c",
+      "date": "2025-07-09T09:00:00.000Z",
+      "poids": 191,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 931,
+      "id_culture": "d1a9b2c3-d5ef-4f7e-9e22-1e2a7e9b8f4d",
+      "date": "2025-07-09T09:00:00.000Z",
+      "poids": 45,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 932,
+      "id_culture": "e6c3d6e7-b3e1-4b3e-9e36-5e6c1e4a2b8f",
+      "date": "2025-07-09T09:00:00.000Z",
+      "poids": 1172,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 933,
+      "id_culture": "c1d9e3f4-7b6e-4c8e-8e13-3c2e8b7d1f5a",
+      "date": "2025-07-09T09:00:00.000Z",
+      "poids": 225,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 934,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-11T09:00:00.000Z",
+      "poids": 563,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 935,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-13T09:00:00.000Z",
+      "poids": 231,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 936,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2025-07-13T09:00:00.000Z",
+      "poids": 50,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 937,
+      "id_culture": "c6c5d7e8-9f1e-4b3e-9e18-7e8c3a5d4b0e",
+      "date": "2025-07-13T09:00:00.000Z",
+      "poids": 450,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 938,
+      "id_culture": "d1a9b2c3-d5ef-4f7e-9e22-1e2a7e9b8f4d",
+      "date": "2025-07-13T09:00:00.000Z",
+      "poids": 323,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 939,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-13T09:00:00.000Z",
+      "poids": 172,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 940,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2025-07-14T09:00:00.000Z",
+      "poids": 30,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 941,
+      "id_culture": "c1d9e3f4-7b6e-4c8e-8e13-3c2e8b7d1f5a",
+      "date": "2025-07-15T09:00:00.000Z",
+      "poids": 196,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 942,
+      "id_culture": "c2e1f3a4-5b7e-4d8e-9e14-2d3e9b8c1e6f",
+      "date": "2025-07-15T09:00:00.000Z",
+      "poids": 145,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 943,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-16T09:00:00.000Z",
+      "poids": 254,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 944,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-19T09:00:00.000Z",
+      "poids": 254,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 945,
+      "id_culture": "d4d2e5f6-08e1-4c1e-8e25-4e5d0b3e1f7a",
+      "date": "2025-07-19T09:00:00.000Z",
+      "poids": 44,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 946,
+      "id_culture": "e6c3d6e7-b3e1-4b3e-9e36-5e6c1e4a2b8f",
+      "date": "2025-07-21T09:00:00.000Z",
+      "poids": 1700,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 947,
+      "id_culture": "d1a9b2c3-d5ef-4f7e-9e22-1e2a7e9b8f4d",
+      "date": "2025-07-22T09:00:00.000Z",
+      "poids": 466,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 948,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-22T09:00:00.000Z",
+      "poids": 845,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 949,
+      "id_culture": "c6c5d7e8-9f1e-4b3e-9e18-7e8c3a5d4b0e",
+      "date": "2025-07-22T09:00:00.000Z",
+      "poids": 283,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 950,
+      "id_culture": "c7d6e8f9-a2ea-4c4e-8e19-8e9d4b6e5c1f",
+      "date": "2025-07-22T09:00:00.000Z",
+      "poids": 829,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 951,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-07-25T09:00:00.000Z",
+      "poids": 247,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 952,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-25T09:00:00.000Z",
+      "poids": 821,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 953,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-27T09:00:00.000Z",
+      "poids": 1241,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 954,
+      "id_culture": "c6c5d7e8-9f1e-4b3e-9e18-7e8c3a5d4b0e",
+      "date": "2025-07-27T09:00:00.000Z",
+      "poids": 408,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 955,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-28T09:00:00.000Z",
+      "poids": 240,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 956,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-07-30T09:00:00.000Z",
+      "poids": 3774,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 957,
+      "id_culture": "c7d6e8f9-a2ea-4c4e-8e19-8e9d4b6e5c1f",
+      "date": "2025-07-30T09:00:00.000Z",
+      "poids": 456,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 958,
+      "id_culture": "c6c5d7e8-9f1e-4b3e-9e18-7e8c3a5d4b0e",
+      "date": "2025-07-30T09:00:00.000Z",
+      "poids": 1111,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 959,
+      "id_culture": "d1a9b2c3-d5ef-4f7e-9e22-1e2a7e9b8f4d",
+      "date": "2025-07-30T09:00:00.000Z",
+      "poids": 520,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 960,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-08-01T09:00:00.000Z",
+      "poids": 448,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 961,
+      "id_culture": "d4d2e5f6-08e1-4c1e-8e25-4e5d0b3e1f7a",
+      "date": "2025-08-02T09:00:00.000Z",
+      "poids": 120,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 962,
+      "id_culture": "c8e7f9a1-b3e1-4d5e-9e20-9e0e5c7f6d2b",
+      "date": "2025-08-03T09:00:00.000Z",
+      "poids": 276,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 963,
+      "id_culture": "f3c9d2e3-19e1-4b9e-9e42-1e2c7e0a8b4c",
+      "date": "2025-08-04T09:00:00.000Z",
+      "poids": 170,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 964,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-08-04T09:00:00.000Z",
+      "poids": 95,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 965,
+      "id_culture": "c6c5d7e8-9f1e-4b3e-9e18-7e8c3a5d4b0e",
+      "date": "2025-08-04T09:00:00.000Z",
+      "poids": 953,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 966,
+      "id_culture": "d5e3f6a7-19e1-4d2e-9e26-5e6e1c4f2a8b",
+      "date": "2025-08-04T09:00:00.000Z",
+      "poids": 30,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 967,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-08-05T09:00:00.000Z",
+      "poids": 4050,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 968,
+      "id_culture": "d1a9b2c3-d5ef-4f7e-9e22-1e2a7e9b8f4d",
+      "date": "2025-08-05T09:00:00.000Z",
+      "poids": 1400,
+      "quantite": 0,
+      "quantite_fiable": false
+    },
+    {
+      "id": 969,
+      "id_culture": "f2b8c1d2-08e1-4a8e-8e41-0e1b6d9f7a3b",
+      "date": "2025-08-07T09:00:00.000Z",
+      "poids": 1575,
+      "quantite": 0,
+      "quantite_fiable": false
+    }
+  ]
+}
