@@ -150,7 +150,7 @@ export default function TVJobsPage() {
             <img
               src={`/images/cultures/hd/${item.img}`}
               alt={item.nom}
-              className="w-32 h-32 object-contain"
+              className="w-40 h-40 object-contain"
             />
             <div className="text-neutral-700">
               <h2 className="text-3xl font-semibold">{item.nom}</h2>
