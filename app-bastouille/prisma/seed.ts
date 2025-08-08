@@ -1,4 +1,5 @@
 import { PrismaClient, categorie as CategorieEnum, moderecolte as ModeRecolteEnum } from '@prisma/client';
+import { isEqual } from 'lodash';
 const prisma = new PrismaClient();
 
 async function main() {
@@ -51,16 +52,44 @@ async function main() {
   const recipients = [
     { id: "b1b1c5b5-bdee-4cf0-a4c3-bd26b3a2cc14", nom: "Plastique noir", img: "rec_noir.png", poids: 84 },
     { id: "c2c2d6d6-ceee-4df1-b4d3-cd37b3a2cc15", nom: "Bois", img: "rec_bois.png", poids: 770 },
-    { id: "473c0705-c500-473d-a6d5-a644f87b88a2", nom: "Petit bolle en verre", img: "rec_verre.png", poids: 0 },
-    { id: "1822ec28-72ae-4578-9588-b3f04d5fc0f2", nom: "Passoire", img: "rec_blanc.png", poids: 0 }
+    { id: "473c0705-c500-473d-a6d5-a644f87b88a2", nom: "Petit bolle en verre", img: "rec_verre.png", poids: 178 },
+    { id: "1822ec28-72ae-4578-9588-b3f04d5fc0f2", nom: "Passoire", img: "rec_blanc.png", poids: 141 }
   ];
 
   for (const recipient of recipients) {
+    /*
     await prisma.recipient.upsert({
       where: { id: recipient.id },
       update: {},
       create: recipient,
     });
+    */
+   /*
+    const existing = await prisma.recipient.findUnique({
+      where: { id: recipient.id },
+    });
+
+    if (existing) {
+      const changedFields = Object.entries(recipient)
+        .filter(([key, val]) => !isEqual(existing[key], val))
+        .map(([key]) => key);
+
+      if (changedFields.length > 0) {
+        await prisma.recipient.update({
+          where: { id: recipient.id },
+          data: recipient,
+        });
+        console.log(`🟡 Mis à jour: ${recipient.nom} - champs modifiés: ${changedFields.join(', ')}`);
+      } else {
+        console.log(`🔵 Inchangé: ${recipient.nom}`);
+      }
+    } else {
+      await prisma.recipient.create({
+        data: recipient,
+      });
+      console.log(`🟢 Créé: ${recipient.nom}`);
+    }
+    */
   }
 
   console.log('✅ Données de récipients insérées.');
