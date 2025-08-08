@@ -22,6 +22,7 @@ export default function SplashScreen() {
     });
   }, []);
 
+  
   return (
     <div
       className={`fixed inset-0 z-50 py-16 px-16 flex items-center justify-center bg-black transition-opacity duration-1000 ${

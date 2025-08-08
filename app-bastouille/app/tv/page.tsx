@@ -19,7 +19,7 @@ export default function TVJobsPage() {
   const toggleRef = useRef<HTMLDivElement>(null);
 
   const fetchData = () => {
-    fetch(`/api/recoltes/synthese?periode=${selectedPeriode}&limit=40`)
+    fetch(`/api/recoltes/synthese?periode=${selectedPeriode}&limit=12`)
       .then((res) => res.json())
       .then((data) => {
         const result = data
@@ -140,7 +140,8 @@ export default function TVJobsPage() {
           Jour
         </ToggleGroupItem>
       </ToggleGroup>
-      <div className={`grid ${recoltesCumulees.length <= 8 ? "grid-cols-2" : "grid-cols-4"} gap-8`} tabIndex={0}>
+      {/*<div className={`grid ${recoltesCumulees.length <= 8 ? "grid-cols-2" : "grid-cols-4"} gap-8`} tabIndex={0}>*/}
+      <div className={`grid grid-cols-4 gap-8`} tabIndex={0}>
         {recoltesCumulees.map((item, index) => (
           <div
             key={index}
