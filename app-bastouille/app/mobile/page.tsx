@@ -11,8 +11,10 @@ export default function MobilePage() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [theme, setTheme] = useState<"soleil" | "lavande">("soleil");
+//  const [isDarkMode, setIsDarkMode] = useState(false);
+//  const [theme, setTheme] = useState<"soleil" | "lavande">("soleil");
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [theme, setTheme] = useState<"soleil" | "lavande">("lavande");
 
   const [selectedPeriode, setSelectedPeriode] = useState<"semaine" | "mois" | "annee">("annee");
 
@@ -99,9 +101,6 @@ export default function MobilePage() {
         <div className="flex items-center gap-2">
           <span className="text-sm">Soleil</span>
           <button
-            //className={`relative w-14 h-8 ${
-            //  theme === "soleil" ? "bg-yellow-300" : "bg-indigo-700"
-            //} rounded-full transition-colors duration-300`}
             className="relative w-14 h-8 rounded-full transition-colors duraction-30 bg-[var(--color-accent)]"
             onClick={() => setTheme((prev) => (prev === "soleil" ? "lavande" : "soleil"))}
           >
