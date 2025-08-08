@@ -145,7 +145,7 @@ export default function TVJobsPage() {
             className="bg-[var(--color-text)] rounded-2xl p-4 flex items-center space-x-8 shadow-lg transition-transform duration-200 hover:scale-105"
           >
             <img
-              src={`/images/cultures/${item.img}`}
+              src={`/images/cultures/hd/${item.img}`}
               alt={item.nom}
               className="w-32 h-32 object-contain"
             />
