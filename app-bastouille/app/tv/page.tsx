@@ -5,6 +5,7 @@ import {
   ToggleGroupItem,
 } from "@/components/ui/toggle-group";
 import Script from "next/script";
+import SplashScreen from "@/components/SplashScreen";
 
 interface Culture {
   nom: string;
@@ -91,7 +92,8 @@ export default function TVJobsPage() {
   }, [selectedPeriode]);
 
   return (
-
+    <>
+      <SplashScreen />
     <div className="min-h-screen p-16">
       <Script
         src="/navigation.js"
@@ -157,6 +159,7 @@ export default function TVJobsPage() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 
