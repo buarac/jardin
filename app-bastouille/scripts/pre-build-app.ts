@@ -37,7 +37,7 @@ const assetsSource = isDev
   : join(__dirname, "../prod-assets");
 const assetsTarget = join(__dirname, "../public");
 
-
+/*
 // Nettoyage du répertoire public
 if (existsSync(assetsTarget)) {
   console.log("🧹 Nettoyage du répertoire public...");
@@ -52,6 +52,7 @@ try {
 } catch (err) {
   console.error("❌ Erreur lors de la copie des assets:", err);
 }
+*/
 
 // --------------------------
 // SECTION: Autres tâches globales (à venir)

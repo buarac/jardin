@@ -47,17 +47,17 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
     <div className="w-full">
       <Listbox value={selectedRecipient} onChange={(r: Recipient) => onChange(r.id)}>
         <div className="relative">
-          <Listbox.Button className="relative w-full h-10 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
-            <div className="flex items-center gap-2">
+          <Listbox.Button className="relative w-full h-16 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
+            <div className="flex items-center gap-4">
               {selectedRecipient ? (
-                <>
+                <div className="flex items-center gap-3">
                   <img
                     src={`/images/recipients/${selectedRecipient.img}`}
                     alt={selectedRecipient.nom}
-                    className="h-6 w-6 object-contain"
+                    className="h-12 w-12 object-contain"
                   />
-                  <span>{selectedRecipient.nom}</span>
-                </>
+                  <span  className="text-lg leading-tight">{selectedRecipient.nom}</span>
+                </div>
               ) : (
                 <span className="text-[var(--color-text-muted)]">Sélectionner un récipient</span>
               )}
@@ -77,7 +77,7 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
                 <Listbox.Option
                   key={recipient.id}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    `relative cursor-default select-none py-[13px] pl-10 pr-4 ${
                       active ? "bg-[var(--color-accent)] text-white" : "text-[var(--color-text)]"
                     }`
                   }
@@ -89,11 +89,11 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
                         <img
                           src={`/images/recipients/${recipient.img}`}
                           alt={recipient.nom}
-                          className="h-6 w-6 rounded-full object-cover"
+                          className="h-12 w-12 rounded-full object-cover"
                         />
                       </span>
                       <span
-                        className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
+                        className={`block truncate ${selected ? "font-medium" : "font-normal"} ml-16 text-lg leading-tight`}
                       >
                         {recipient.nom} ({recipient.poids}g)
                       </span>

@@ -104,14 +104,14 @@ export default function TVJobsPage() {
         type="single"
         value={selectedPeriode}
         onValueChange={(value) => value && setSelectedPeriode(value)}
-        className="flex justify-center gap-6 mb-12 w-full max-w-screen-xl mx-auto "
+        className="flex justify-center gap-6 mb-12 w-full max-w-screen-xl mx-auto text-[var(--color-accent)]"
         ref={toggleRef}
       >
         <ToggleGroupItem
           data-list-item
           value="annee"
           tabIndex={0}
-          className="text-3xl py-6 data-[state=on]:bg-[var(--color-text)] data-[state=on]:text-[var(--color-base)]"
+          className="text-5xl py-8 px-8 data-[state=on]:bg-[var(--color-accent)] data-[state=on]:text-[var(--color-fill)]"
         >
           Année
         </ToggleGroupItem>
@@ -119,7 +119,7 @@ export default function TVJobsPage() {
           data-list-item
           value="mois"
           tabIndex={0}
-          className="text-3xl py-6 data-[state=on]:bg-[var(--color-text)] data-[state=on]:text-[var(--color-base)]"
+          className="text-5xl py-8 px-8 data-[state=on]:bg-[var(--color-accent)] data-[state=on]:text-[var(--color-fill)]"
         >
           Mois
         </ToggleGroupItem>
@@ -127,7 +127,7 @@ export default function TVJobsPage() {
           data-list-item
           value="semaine"
           tabIndex={0}
-          className="text-3xl py-6 data-[state=on]:bg-[var(--color-text)] data-[state=on]:text-[var(--color-base)]"
+          className="text-5xl py-8 px-8 data-[state=on]:bg-[var(--color-accent)] data-[state=on]:text-[var(--color-fill)]"
         >
           Semaine
         </ToggleGroupItem>
@@ -135,7 +135,7 @@ export default function TVJobsPage() {
           data-list-item
           value="jour"
           tabIndex={0}
-          className="text-3xl py-6 data-[state=on]:bg-[var(--color-muted)] data-[state=on]:text-[var(--color-base)]"
+          className="text-5xl py-8 px-8 data-[state=on]:bg-[var(--color-accent)] data-[state=on]:text-[var(--color-fill)]"
         >
           Jour
         </ToggleGroupItem>

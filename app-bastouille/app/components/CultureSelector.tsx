@@ -30,8 +30,8 @@ export default function CultureSelector({ value, onChange }: CultureSelectorProp
     <div className="w-full">
       <Listbox value={selectedCulture} onChange={(c: Culture) => onChange(c.id)}>
         <div className="relative">
-          <Listbox.Button className="relative w-full h-14 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
-            <div className="flex items-center gap-3">
+          <Listbox.Button className="relative w-full h-16 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
+            <div className="flex items-center gap-4">
               {selectedCulture ? (
                 <div className="flex items-center gap-3">
                   <img
