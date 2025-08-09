@@ -1,7 +1,7 @@
 // scripts/pre-build-app.ts
 
-const { existsSync, mkdirSync, copyFileSync, readdirSync, statSync, rmSync } = require("fs");
-const { join } = require("path");
+import { existsSync, mkdirSync, copyFileSync, readdirSync, statSync, rmSync } from "fs";
+import { join } from "path";
 require("dotenv").config();
 
 // Détection de l'environnement
