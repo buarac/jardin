@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import CultureSelector from "@/components/CultureSelector";
 import RecipientSelector from "@/components/RecipientSelector";
-import { MobileCultureData, MobileRecipientData } from "@/types/mobile";
+import { MobileCultureData, MobileRecipientData, MobileFormState } from "@/types/mobile";
 
 interface MobileRecolteFormProps {
   cultures: MobileCultureData[];
@@ -29,7 +29,26 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
   className = "",
 }) => {
   const [formKey, setFormKey] = useState(0);
+  const [formState, setFormState] = useState<MobileFormState>({
+    poids: "",
+    quantite: ""
+  });
+  
   const selectedCulture = cultures.find((c) => c.id === selectedCultureId);
+
+  // Validation du formulaire
+  const isFormValid = 
+    selectedCultureId && 
+    formState.poids.trim() !== "" && 
+    parseFloat(formState.poids) > 0 &&
+    selectedRecipientId;
+
+  const handleInputChange = (field: keyof MobileFormState, value: string) => {
+    setFormState(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +57,7 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
     
     // Reset form after submission
     setFormKey(prev => prev + 1);
+    setFormState({ poids: "", quantite: "" });
   };
 
   const handlePhotoClick = () => {
@@ -74,6 +94,8 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
             step="1"
             inputMode="numeric"
             placeholder="Poids (g)"
+            value={formState.poids}
+            onChange={(e) => handleInputChange("poids", e.target.value)}
             className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
             required
           />
@@ -82,6 +104,8 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
             type="number"
             inputMode="numeric"
             placeholder="Unités"
+            value={formState.quantite}
+            onChange={(e) => handleInputChange("quantite", e.target.value)}
             className="flex-1 px-4 py-2 rounded bg-[var(--color-card)] text-[var(--color-text)] w-1/2"
             disabled={selectedCulture?.mode_recolte !== "poids_unite"}
           />
@@ -95,6 +119,15 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
           />
         </div>
 
+        {/* Indicateur de validation */}
+        {!isFormValid && (
+          <div className="text-xs text-amber-600 dark:text-amber-400 text-center">
+            {!selectedCultureId && "⚠️ Sélectionnez une culture"}
+            {formState.poids.trim() && parseFloat(formState.poids) <= 0 && "⚠️ Le poids doit être supérieur à 0"}
+            {!selectedRecipientId && "⚠️ Sélectionnez un récipient"}
+          </div>
+        )}
+
         {/* Bouton photo */}
         <button
           type="button"
@@ -107,8 +140,12 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
         {/* Bouton de soumission */}
         <button
           type="submit"
-          className="px-6 py-3 rounded-full bg-[var(--color-accent)] hover:brightness-90 text-[var(--color-base)] font-semibold shadow disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-          disabled={isSubmitting}
+          className={`px-6 py-3 rounded-full font-semibold shadow transition-all duration-200 ${
+            isFormValid
+              ? "bg-[var(--color-accent)] hover:brightness-90 text-[var(--color-base)]"
+              : "bg-gray-400 text-gray-600 cursor-not-allowed"
+          }`}
+          disabled={isSubmitting || !isFormValid}
         >
           {isSubmitting ? "⏳ Ajout en cours..." : "+ Ajouter la récolte"}
         </button>
