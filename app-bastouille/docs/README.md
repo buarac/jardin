@@ -1,75 +1,135 @@
-# 📘 Documentation du projet *app-bastouille*
+# 📘 Documentation Baštouille
 
-## Table des matières
+> **Centre de documentation complet** pour l'application de gestion de jardin Baštouille
 
-### 1. Introduction
-- [1.1 Objectif du projet](#11-objectif-du-projet)
-- [1.2 Public cible](#12-public-cible)
-- [1.3 Technologies utilisées](#13-technologies-utilisées)
+## 🎯 Navigation rapide
 
-### 2. Structure du projet
-- [2.1 Arborescence des dossiers](#21-arborescence-des-dossiers)
-- [2.2 Fonctionnement général](#22-fonctionnement-général)
+| 📖 **Démarrage** | 👤 **Utilisation** | 👨‍💻 **Développement** |
+|------------------|-------------------|------------------------|
+| [Guide de démarrage](GETTING_STARTED.md) | [Guide utilisateur](USER_GUIDE.md) | [Guide développeur](DEVELOPER_GUIDE.md) |
+| Installation et configuration | Interface et fonctionnalités | Contribution et développement |
 
-### 3. Fonctionnalités principales
-- [3.1 Gestion des cultures](#31-gestion-des-cultures)
-- [3.2 Gestion des récoltes](#32-gestion-des-récoltes)
-- [3.3 Données météo (Open-Meteo)](#33-données-météo-(open-meteo))
-- [3.4 Tableau de bord et statistiques](#34-tableau-de-bord-et-statistiques)
-- [3.5 Interface mobile vs desktop](#35-interface-mobile-vs-desktop)
-
-### 4. Composants techniques
-- [4.1 API REST](#41-api-rest)
-- [4.2 Prisma ORM et base de données](#42-prisma-orm-et-base-de-données)
-  
-Le projet utilise Prisma comme ORM pour interagir avec la base de données PostgreSQL.
-
-#### 💡 Principales commandes Prisma
-
-| Commande                         | Usage                  | Crée Migration | Applique Migration | Génère Client | Interactif | Crée DB |
-|----------------------------------|------------------------|----------------|---------------------|----------------|------------|---------|
-| `npx prisma migrate dev`         | 🧪 Développement local | ✅              | ✅                   | ✅              | ✅          | ✅       |
-| `npx prisma migrate deploy`      | 🚀 Production           | ❌              | ✅                   | ❌              | ❌          | ❌       |
-| `npx prisma generate`            | 🔄 Génère client seul   | ❌              | ❌                   | ✅              | ❌          | ❌       |
-
-#### 📘 Détails
-
-- `prisma migrate dev` :
-  - Crée une nouvelle migration à partir du schéma (`schema.prisma`)
-  - Applique cette migration à la base locale
-  - Met à jour le client Prisma automatiquement
-  - À utiliser uniquement en environnement de développement
-
-- `prisma migrate deploy` :
-  - Applique les fichiers de migration existants à une base de données cible (ex. en production)
-  - Ne génère pas de migration
-  - Ne met pas à jour automatiquement le client Prisma
-
-- `prisma generate` :
-  - Génère manuellement le client Prisma, à utiliser après une migration ou si le client a été supprimé (`rm -rf node_modules/@prisma/client`)
+| 🏗️ **Technique** | 🎨 **Interface** | 🚀 **Production** |
+|------------------|------------------|-------------------|
+| [Architecture](ARCHITECTURE.md) | [Composants UI](COMPONENTS.md) | [Déploiement](DEPLOYMENT.md) |
+| Structure et flux de données | Catalogue des composants | Mise en production |
 
 ---
-- [4.3 Système de Jobs (alimentation météo)](#43-système-de-jobs-(alimentation-météo))
-- [4.4 Thème et dark mode](#44-thème-et-dark-mode)
-- [4.5 Composants UI (shadcn/ui, Tailwind)](#45-composants-ui-(shadcn/ui,-tailwind))
-- [4.6 PWA et installation sur iPhone](#46-pwa-et-installation-sur-iphone)
 
-### 5. Déploiement et production
-- [5.1 Configuration PM2](#51-configuration-pm2)
-- [5.2 Tâches CRON avec PM2](#52-tâches-cron-avec-pm2)
-- [5.3 Configuration des environnements](#53-configuration-des-environnements)
+## 📚 Table des matières
 
-### 6. Développement et tests
-- [6.1 Lancer en mode développement](#61-lancer-en-mode-développement)
-- [6.2 Lancer un build de production](#62-lancer-un-build-de-production)
-- [6.3 Tests manuels et debugging](#63-tests-manuels-et-debugging)
+### 🚀 **Démarrage et installation**
+- [Guide de démarrage](GETTING_STARTED.md) - Installation et première utilisation
+- [Configuration de l'environnement](GETTING_STARTED.md#configuration)
 
-### 7. Perspectives d’évolution
-- [7.1 Fonctionnalités à venir](#71-fonctionnalités-à-venir)
-- [7.2 Améliorations possibles](#72-améliorations-possibles)
+### 👤 **Utilisation de l'application**
+- [Guide utilisateur](USER_GUIDE.md) - Interface et fonctionnalités
+- [Gestion des cultures](USER_GUIDE.md#gestion-des-cultures)
+- [Enregistrement des récoltes](USER_GUIDE.md#enregistrement-des-récoltes)
+- [Interface mobile vs desktop](USER_GUIDE.md#interfaces)
 
-### Annexes
-- [A.1 Exemple de fichier .env](#a1-exemple-de-fichier-env)
-- [A.2 Requête API typique](#a2-requête-api-typique)
-- [A.3 Astuces de développement](#a3-astuces-de-développement)
+### 👨‍💻 **Développement et contribution**
+- [Guide développeur](DEVELOPER_GUIDE.md) - Standards et bonnes pratiques
+- [Structure du projet](DEVELOPER_GUIDE.md#structure-du-projet)
+- [Ajout de fonctionnalités](DEVELOPER_GUIDE.md#ajout-de-fonctionnalités)
+
+### 🏗️ **Architecture technique**
+- [Architecture](ARCHITECTURE.md) - Vue d'ensemble du système
+- [Base de données](ARCHITECTURE.md#base-de-données)
+- [Jobs automatisés](ARCHITECTURE.md#jobs-automatisés)
+- [Flux de données](ARCHITECTURE.md#flux-de-données)
+
+### 🧩 **Composants et interface**
+- [Composants UI](COMPONENTS.md) - Catalogue des composants
+- [Système de thèmes](COMPONENTS.md#système-de-thèmes)
+- [Responsive design](COMPONENTS.md#responsive-design)
+
+### 🔌 **API et intégrations**
+- [Référence API](API_REFERENCE.md) - Documentation des endpoints
+- [Modèles de données](API_REFERENCE.md#modèles-de-données)
+- [Intégration météo](API_REFERENCE.md#intégration-météo)
+
+### 🎨 **Personnalisation**
+- [Thèmes UI](UI_THEMES.md) - Personnalisation de l'interface
+- [Variables CSS](UI_THEMES.md#variables-css)
+- [Création de thèmes](UI_THEMES.md#création-de-thèmes)
+
+### 🚀 **Déploiement et production**
+- [Guide de déploiement](DEPLOYMENT.md) - Mise en production
+- [Configuration PM2](DEPLOYMENT.md#configuration-pm2)
+- [Monitoring et logs](DEPLOYMENT.md#monitoring)
+
+---
+
+## 🔍 **Recherche dans la documentation**
+
+### Par fonctionnalité
+- **Cultures** → [Guide utilisateur](USER_GUIDE.md#gestion-des-cultures) + [API Cultures](API_REFERENCE.md#cultures)
+- **Récoltes** → [Guide utilisateur](USER_GUIDE.md#enregistrement-des-récoltes) + [API Récoltes](API_REFERENCE.md#récoltes)
+- **Météo** → [Architecture](ARCHITECTURE.md#jobs-automatisés) + [API Météo](API_REFERENCE.md#météo)
+- **Thèmes** → [Thèmes UI](UI_THEMES.md) + [Composants](COMPONENTS.md#système-de-thèmes)
+
+### Par composant technique
+- **Base de données** → [Architecture](ARCHITECTURE.md#base-de-données) + [Guide développeur](DEVELOPER_GUIDE.md#base-de-données)
+- **Jobs** → [JobStandard.md](JobStandard.md) + [Architecture](ARCHITECTURE.md#jobs-automatisés)
+- **API** → [Référence API](API_REFERENCE.md) + [Guide développeur](DEVELOPER_GUIDE.md#api)
+
+---
+
+## 📋 **Documentation existante**
+
+### 📖 **Guides standards**
+- [JobStandard.md](JobStandard.md) - Standards pour la création de jobs automatisés
+- [MEP.md](MEP.md) - Guide de mise en production
+- [git-memo-multi-machines.md](git-memo-multi-machines.md) - Workflow Git multi-machines
+
+### 🔧 **Références techniques**
+- [package.json](../../package.json) - Dépendances et scripts
+- [prisma/schema.prisma](../../prisma/schema.prisma) - Modèle de base de données
+- [tailwind.config.js](../../tailwind.config.js) - Configuration Tailwind CSS
+
+---
+
+## 🆕 **Nouveautés de la documentation**
+
+### ✅ **Ajouts récents**
+- Guide de démarrage complet
+- Catalogue des composants UI
+- Référence API détaillée
+- Guide des thèmes et personnalisation
+
+### 🚧 **En cours de développement**
+- Captures d'écran des interfaces
+- Exemples d'utilisation concrets
+- Tutoriels vidéo (à venir)
+
+---
+
+## 🤝 **Contribuer à la documentation**
+
+### 📝 **Améliorer cette documentation**
+1. Identifier une section à améliorer
+2. Créer une issue ou une PR
+3. Suivre les standards de formatage
+4. Tester les liens et exemples
+
+### 🐛 **Signaler un problème**
+- **Documentation manquante** → [Issue GitHub](../../issues)
+- **Lien cassé** → [Issue GitHub](../../issues)
+- **Contenu obsolète** → [Issue GitHub](../../issues)
+
+---
+
+## 📞 **Besoin d'aide ?**
+
+- 🔍 **Recherche** : Utilisez la navigation ci-dessus
+- 📖 **Tutoriel** : Commencez par le [Guide de démarrage](GETTING_STARTED.md)
+- 🆘 **Support** : [Issues GitHub](../../issues) ou [Guide développeur](DEVELOPER_GUIDE.md)
+
+---
+
+<div align="center">
+  <p><strong>🌱 Baštouille</strong> - Documentation complète et organisée</p>
+  <p><em>Dernière mise à jour : {{ date }}</em></p>
+</div>
 	

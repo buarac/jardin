@@ -1,0 +1,57 @@
+/* Styles pour la navigation TV */
+.tv-navigation-container {
+  outline: none;
+}
+
+.tv-focusable-element:focus {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  transform: scale(1.05);
+}
+
+.tv-period-button:focus {
+  outline: 4px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.6);
+  transform: scale(1.1);
+}
+
+.tv-culture-card:focus {
+  outline: 4px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 25px rgba(var(--color-accent-rgb), 0.7);
+  transform: scale(1.05);
+}
+
+/* Animation de focus */
+.tv-focusable-element:focus {
+  animation: focus-pulse 0.3s ease-in-out;
+}
+
+@keyframes focus-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1.05); }
+}
+
+/* Indicateur de focus pour TV */
+.tv-focusable-element[data-focusable="true"]:focus::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 2px solid var(--color-accent);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Optimisations pour TV */
+@media (min-width: 1920px) {
+  .tv-focusable-element:focus {
+    outline-width: 6px;
+    outline-offset: 4px;
+  }
+}

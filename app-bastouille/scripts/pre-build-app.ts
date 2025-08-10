@@ -1,10 +1,12 @@
 // scripts/pre-build-app.ts
 
-import { existsSync, mkdirSync, copyFileSync, readdirSync, statSync, rmSync } from "fs";
-import { join } from "path";
-require("dotenv").config();
+const { existsSync, mkdirSync, copyFileSync, readdirSync, statSync, rmSync } = require("fs");
+const { dirname, join } = require("path");
+const dotenv = require("dotenv");
 
-// Détection de l'environnement
+dotenv.config();
+
+// Détection de l'environnement actuel (développement ou production)
 const nodeEnv = process.env.NODE_ENV;
 const isDev = nodeEnv === "development";
 

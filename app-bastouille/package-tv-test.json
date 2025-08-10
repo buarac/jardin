@@ -1,0 +1,16 @@
+{
+  "name": "tv-navigation-test",
+  "version": "1.0.0",
+  "description": "Tests pour la navigation TV",
+  "main": "scripts/test-tv-navigation.js",
+  "scripts": {
+    "test:tv": "node scripts/test-tv-navigation.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "devDependencies": {},
+  "keywords": ["tv", "navigation", "test", "puppeteer"],
+  "author": "Baštouille Team",
+  "license": "MIT"
+}
