@@ -1,18 +1,19 @@
-"use client"
-import React, { useEffect, useState } from 'react';
+"use client";
 
-interface FocusEvent {
+import React, { useState, useEffect } from "react";
+
+interface TVFocusEvent {
   timestamp: number;
   element: string;
   timeSinceLast: number;
 }
 
 export const TVFocusDebugger: React.FC = () => {
-  const [focusEvents, setFocusEvents] = useState<FocusEvent[]>([]);
+  const [focusEvents, setFocusEvents] = useState<TVFocusEvent[]>([]);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleFocusIn = (event: FocusEvent) => {
+    const handleFocusIn = (event: globalThis.FocusEvent) => {
       const target = event.target as HTMLElement;
       if (!target || !target.hasAttribute('data-focusable')) return;
 
@@ -20,7 +21,7 @@ export const TVFocusDebugger: React.FC = () => {
       const lastEvent = focusEvents[focusEvents.length - 1];
       const timeSinceLast = lastEvent ? now - lastEvent.timestamp : 0;
 
-      const newEvent: FocusEvent = {
+      const newEvent: TVFocusEvent = {
         timestamp: now,
         element: target.getAttribute('data-culture-name') || target.textContent?.slice(0, 20) || 'Inconnu',
         timeSinceLast
