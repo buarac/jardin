@@ -51,11 +51,11 @@ export const MobileMessageZone: React.FC<MobileMessageZoneProps> = ({
   const getMessageStyles = (type: MobileMessage["type"]) => {
     switch (type) {
       case "success":
-        return "border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-800";
+        return "border-green-300 bg-green-50/80 dark:bg-green-900/30 dark:border-green-700";
       case "error":
-        return "border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800";
+        return "border-red-300 bg-red-50/80 dark:bg-red-900/30 dark:border-red-700";
       case "info":
-        return "border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800";
+        return "border-blue-300 bg-blue-50/80 dark:bg-blue-900/30 dark:border-blue-700";
     }
   };
 
@@ -65,6 +65,11 @@ export const MobileMessageZone: React.FC<MobileMessageZoneProps> = ({
         <div
           key={message.id}
           className={`flex items-start gap-3 p-3 rounded-lg border ${getMessageStyles(message.type)} animate-in slide-in-from-top-2 duration-300`}
+          style={{
+            backgroundColor: 'var(--color-card)',
+            borderColor: 'var(--color-muted)',
+            color: 'var(--color-text)'
+          }}
         >
           {/* Icône */}
           <div className="flex-shrink-0 mt-0.5">
@@ -73,10 +78,10 @@ export const MobileMessageZone: React.FC<MobileMessageZoneProps> = ({
 
           {/* Contenu */}
           <div className="flex-1 min-w-0">
-            <h4 className="font-medium text-sm text-[var(--color-text)]">
+            <h4 className="font-medium text-sm" style={{ color: 'var(--color-text)' }}>
               {message.title}
             </h4>
-            <p className="text-sm text-[var(--color-text)] opacity-80 mt-1">
+            <p className="text-sm opacity-80 mt-1" style={{ color: 'var(--color-text)' }}>
               {message.content}
             </p>
           </div>
@@ -84,7 +89,17 @@ export const MobileMessageZone: React.FC<MobileMessageZoneProps> = ({
           {/* Bouton fermer */}
           <button
             onClick={() => onRemoveMessage(message.id)}
-            className="flex-shrink-0 p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+            className="flex-shrink-0 p-1 rounded-full transition-colors"
+            style={{
+              color: 'var(--color-text)',
+              backgroundColor: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-muted)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
             aria-label="Fermer le message"
           >
             <X className="w-4 h-4" />

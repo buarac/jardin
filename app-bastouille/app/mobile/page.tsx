@@ -164,6 +164,10 @@ export default function MobilePage() {
         autoHide: true
       });
       
+      // Désélectionner la culture et le récipient après l'ajout
+      setSelectedCultureId("");
+      setSelectedRecipientId(null);
+      
       // Rafraîchir les données
       refresh();
     } catch (err) {

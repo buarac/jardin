@@ -123,7 +123,6 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
         {!isFormValid && (
           <div className="text-xs text-amber-600 dark:text-amber-400 text-center">
             {!selectedCultureId && "⚠️ Sélectionnez une culture"}
-            {!formState.poids.trim() && "⚠️ Saisissez un poids"}
             {formState.poids.trim() && parseFloat(formState.poids) <= 0 && "⚠️ Le poids doit être supérieur à 0"}
             {!selectedRecipientId && "⚠️ Sélectionnez un récipient"}
           </div>
