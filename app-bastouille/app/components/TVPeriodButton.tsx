@@ -55,7 +55,7 @@ export const TVPeriodButton = forwardRef<HTMLDivElement, TVPeriodButtonProps>(
           isSelected
             ? 'bg-[var(--color-accent)] text-[var(--color-fill)]'
             : 'text-[var(--color-accent)]'
-        } text-5xl py-8 px-8 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-[var(--color-accent)] focus:ring-opacity-50 hover:scale-105`}
+        } text-5xl py-2 px-2 rounded-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-[var(--color-accent)] focus:ring-opacity-50 hover:scale-105`}
         tabIndex={0}
         data-focusable="true"
         data-period={value}
