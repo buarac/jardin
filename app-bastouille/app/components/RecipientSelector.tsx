@@ -16,7 +16,10 @@ type RecipientSelectorProps = {
   onChange: (id: string) => void;
 };
 
-export default function RecipientSelector({ value, onChange }: RecipientSelectorProps) {
+export default function RecipientSelector({
+  value,
+  onChange,
+}: RecipientSelectorProps) {
   const [recipients, setRecipients] = useState<Recipient[]>([]);
 
   useEffect(() => {
@@ -31,7 +34,9 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
         };
 
         const fullList = [...data, pasDeRecipient];
-        const defaultIndex = fullList.findIndex(r => r.nom.toLowerCase() === "plastique noir");
+        const defaultIndex = fullList.findIndex(
+          (r) => r.nom.toLowerCase() === "plastique noir"
+        );
         setRecipients(fullList);
 
         // Sélectionner "Plastique noir" par défaut si value est null
@@ -45,7 +50,10 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
 
   return (
     <div className="w-full">
-      <Listbox value={selectedRecipient} onChange={(r: Recipient) => onChange(r.id)}>
+      <Listbox
+        value={selectedRecipient}
+        onChange={(r: Recipient) => onChange(r.id)}
+      >
         <div className="relative">
           <Listbox.Button className="relative w-full h-16 flex items-center rounded-md bg-[var(--color-card)] px-3 pr-10 text-left text-[var(--color-text)] border border-gray-300">
             <div className="flex items-center gap-4">
@@ -56,14 +64,21 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
                     alt={selectedRecipient.nom}
                     className="h-12 w-12 object-contain"
                   />
-                  <span  className="text-lg leading-tight">{selectedRecipient.nom}</span>
+                  <span className="text-lg leading-tight">
+                    {selectedRecipient.nom}
+                  </span>
                 </div>
               ) : (
-                <span className="text-[var(--color-text-muted)]">Sélectionner un récipient</span>
+                <span className="text-[var(--color-text-muted)]">
+                  Sélectionner un récipient
+                </span>
               )}
             </div>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <ChevronDown className="h-5 w-5 text-[var(--color-text-muted)]" aria-hidden="true" />
+              <ChevronDown
+                className="h-5 w-5 text-[var(--color-text-muted)]"
+                aria-hidden="true"
+              />
             </span>
           </Listbox.Button>
           <Transition
@@ -78,7 +93,9 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
                   key={recipient.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-[13px] pl-10 pr-4 ${
-                      active ? "bg-[var(--color-accent)] text-white" : "text-[var(--color-text)]"
+                      active
+                        ? "bg-[var(--color-accent)] text-white"
+                        : "text-[var(--color-text)]"
                     }`
                   }
                   value={recipient}
@@ -93,7 +110,9 @@ export default function RecipientSelector({ value, onChange }: RecipientSelector
                         />
                       </span>
                       <span
-                        className={`block truncate ${selected ? "font-medium" : "font-normal"} ml-16 text-lg leading-tight`}
+                        className={`block truncate ${
+                          selected ? "font-medium" : "font-normal"
+                        } ml-16 text-lg leading-tight`}
                       >
                         {recipient.nom} ({recipient.poids}g)
                       </span>

@@ -1,17 +1,21 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import CultureSelector from "@/components/CultureSelector";
-import RecipientSelector from "@/components/RecipientSelector";
-import { MobileCultureData, MobileRecipientData, MobileFormState } from "@/types/mobile";
+import { MobileCultureSelector } from "./MobileCultureSelector";
+import { MobileRecipientSelector } from "./MobileRecipientSelector";
+import {
+  MobileCultureData,
+  MobileRecipientData,
+  MobileFormState,
+} from "@/types/mobile";
 
 interface MobileRecolteFormProps {
   cultures: MobileCultureData[];
   recipients: MobileRecipientData[];
   selectedCultureId: string;
-  selectedRecipientId: string | null;
+  selectedRecipientId: string;
   onCultureChange: (cultureId: string) => void;
-  onRecipientChange: (recipientId: string | null) => void;
+  onRecipientChange: (recipientId: string) => void;
   onSubmit: (formData: FormData) => void;
   isSubmitting?: boolean;
   className?: string;
@@ -31,32 +35,39 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
   const [formKey, setFormKey] = useState(0);
   const [formState, setFormState] = useState<MobileFormState>({
     poids: "",
-    quantite: ""
+    quantite: "",
   });
-  
+
   const selectedCulture = cultures.find((c) => c.id === selectedCultureId);
 
   // Validation du formulaire
-  const isFormValid = 
-    selectedCultureId && 
-    formState.poids.trim() !== "" && 
-    parseFloat(formState.poids) > 0 &&
-    selectedRecipientId;
+  const isFormValid =
+    selectedCultureId &&
+    selectedRecipientId &&
+    formState.poids.trim() !== "" &&
+    !isNaN(parseFloat(formState.poids)) &&
+    parseFloat(formState.poids) > 0;
 
   const handleInputChange = (field: keyof MobileFormState, value: string) => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Validation manuelle avant soumission
+    if (!isFormValid) {
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
     onSubmit(formData);
-    
+
     // Reset form after submission
-    setFormKey(prev => prev + 1);
+    setFormKey((prev) => prev + 1);
     setFormState({ poids: "", quantite: "" });
   };
 
@@ -72,16 +83,18 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
   }, [cultures, selectedCultureId, onCultureChange]);
 
   return (
-    <div className={`flex flex-col items-center justify-center gap-4 ${className}`}>
+    <div
+      className={`flex flex-col items-center justify-center gap-4 ${className}`}
+    >
       <form
         key={formKey}
         className="flex flex-col gap-2 w-full"
         onSubmit={handleSubmit}
       >
         {/* Sélecteur de culture */}
-        <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
-          <CultureSelector
-            value={selectedCultureId}
+        <div className="w-full max-w-sm">
+          <MobileCultureSelector
+            selectedCultureId={selectedCultureId}
             onChange={onCultureChange}
           />
         </div>
@@ -112,9 +125,9 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
         </div>
 
         {/* Sélecteur de récipient */}
-        <div className="flex pd-2 w-full max-w-sm rounded bg-[var(--color-card)] text-[var(--color-text)]">
-          <RecipientSelector
-            value={selectedRecipientId}
+        <div className="w-full max-w-sm">
+          <MobileRecipientSelector
+            selectedRecipientId={selectedRecipientId}
             onChange={onRecipientChange}
           />
         </div>
@@ -123,8 +136,11 @@ export const MobileRecolteForm: React.FC<MobileRecolteFormProps> = ({
         {!isFormValid && (
           <div className="text-xs text-amber-600 dark:text-amber-400 text-center">
             {!selectedCultureId && "⚠️ Sélectionnez une culture"}
-            {formState.poids.trim() && parseFloat(formState.poids) <= 0 && "⚠️ Le poids doit être supérieur à 0"}
             {!selectedRecipientId && "⚠️ Sélectionnez un récipient"}
+            {formState.poids.trim() === "" && "⚠️ Entrez un poids"}
+            {formState.poids.trim() !== "" &&
+              parseFloat(formState.poids) <= 0 &&
+              "⚠️ Le poids doit être supérieur à 0"}
           </div>
         )}
 

@@ -8,32 +8,47 @@ import { MobileRecolteTable } from "@/components/mobile/MobileRecolteTable";
 import { MobileRecolteForm } from "@/components/mobile/MobileRecolteForm";
 import { MobileMessageZone } from "@/components/mobile/MobileMessageZone";
 import { useMobileRecoltes } from "@/components/hooks/useMobileRecoltes";
-import { 
-  MobileThemeState, 
-  MobilePeriod, 
-  MobileCultureData, 
+import {
+  MobileThemeState,
+  MobilePeriod,
+  MobileCultureData,
   MobileRecipientData,
   MobileMessage,
-  MobileRecolteSummary
+  MobileRecolteSummary,
 } from "@/types/mobile";
 
 export default function MobilePage() {
   const [isMounted, setIsMounted] = useState(false);
-  
+
   // État du thème
   const [themeState, setThemeState] = useState<MobileThemeState>({
     isDarkMode: true,
-    theme: "lavande"
+    theme: "lavande",
   });
 
   // État de la période
   const [selectedPeriode, setSelectedPeriode] = useState<MobilePeriod>("annee");
 
+  // État des sections ouvertes (mutuellement exclusives)
+  const [openSection, setOpenSection] = useState<
+    "synthese" | "nouvelle" | null
+  >("nouvelle");
+
+  const handleToggleSection = (section: "synthese" | "nouvelle") => {
+    if (openSection === section) {
+      // Si on ferme la section actuellement ouverte, ouvrir l'autre automatiquement
+      setOpenSection(section === "synthese" ? "nouvelle" : "synthese");
+    } else {
+      // Ouvrir la nouvelle section (l'autre se ferme automatiquement)
+      setOpenSection(section);
+    }
+  };
+
   // État des cultures et récipients
   const [cultures, setCultures] = useState<MobileCultureData[]>([]);
   const [selectedCultureId, setSelectedCultureId] = useState("");
   const [recipients, setRecipients] = useState<MobileRecipientData[]>([]);
-  const [selectedRecipientId, setSelectedRecipientId] = useState<string | null>(null);
+  const [selectedRecipientId, setSelectedRecipientId] = useState<string>("");
 
   // État de soumission
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +57,8 @@ export default function MobilePage() {
   const [messages, setMessages] = useState<MobileMessage[]>([]);
 
   // Hook personnalisé pour les récoltes
-  const { recoltes, loading, error, refresh } = useMobileRecoltes(selectedPeriode);
+  const { recoltes, loading, error, refresh } =
+    useMobileRecoltes(selectedPeriode);
 
   // Initialisation au montage
   useEffect(() => {
@@ -51,7 +67,10 @@ export default function MobilePage() {
 
   // Gestion du thème
   useEffect(() => {
-    document.documentElement.setAttribute("data-mode", themeState.isDarkMode ? "dark" : "light");
+    document.documentElement.setAttribute(
+      "data-mode",
+      themeState.isDarkMode ? "dark" : "light"
+    );
   }, [themeState.isDarkMode]);
 
   useEffect(() => {
@@ -80,22 +99,22 @@ export default function MobilePage() {
     const newMessage: MobileMessage = {
       ...message,
       id: Date.now().toString(),
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
-    setMessages(prev => [...prev, newMessage]);
+    setMessages((prev) => [...prev, newMessage]);
   };
 
   const removeMessage = (messageId: string) => {
-    setMessages(prev => prev.filter(m => m.id !== messageId));
+    setMessages((prev) => prev.filter((m) => m.id !== messageId));
   };
 
   // Gestionnaires d'événements
   const handleThemeChange = (theme: "soleil" | "lavande") => {
-    setThemeState(prev => ({ ...prev, theme }));
+    setThemeState((prev) => ({ ...prev, theme }));
   };
 
   const handleDarkModeChange = (isDark: boolean) => {
-    setThemeState(prev => ({ ...prev, isDarkMode: isDark }));
+    setThemeState((prev) => ({ ...prev, isDarkMode: isDark }));
   };
 
   const handlePeriodChange = (period: MobilePeriod) => {
@@ -106,7 +125,7 @@ export default function MobilePage() {
     setSelectedCultureId(cultureId);
   };
 
-  const handleRecipientChange = (recipientId: string | null) => {
+  const handleRecipientChange = (recipientId: string) => {
     setSelectedRecipientId(recipientId);
   };
 
@@ -115,13 +134,13 @@ export default function MobilePage() {
     const quantite = formData.get("quantite")?.toString() ?? "";
     const recipient = recipients.find((r) => r.id === selectedRecipientId);
     const culture = cultures.find((c) => c.id === selectedCultureId);
-    
+
     if (!culture || !recipient) {
       addMessage({
         type: "error",
         title: "Erreur de validation",
         content: "Culture ou récipient manquant",
-        autoHide: true
+        autoHide: true,
       });
       return;
     }
@@ -154,20 +173,22 @@ export default function MobilePage() {
         throw new Error(error);
       }
 
-      // Message de succès détaillé
-      const successMessage = `🌱 ${culture.nom} : ${(poidsNet / 1000).toFixed(2)} kg${quantite ? ` (${quantite} unités)` : ""} dans ${recipient.nom}`;
-      
+      // Message de succès simplifié
+      const successMessage = `🌱 ${culture.nom} : ${(poidsNet / 1000).toFixed(
+        2
+      )} kg`;
+
       addMessage({
         type: "success",
         title: "✅ Récolte enregistrée !",
         content: successMessage,
-        autoHide: true
+        autoHide: true,
       });
-      
+
       // Désélectionner la culture et le récipient après l'ajout
       setSelectedCultureId("");
-      setSelectedRecipientId(null);
-      
+      setSelectedRecipientId("");
+
       // Rafraîchir les données
       refresh();
     } catch (err) {
@@ -176,7 +197,7 @@ export default function MobilePage() {
         type: "error",
         title: "❌ Erreur",
         content: "Erreur lors de l'enregistrement de la récolte",
-        autoHide: true
+        autoHide: true,
       });
     } finally {
       setIsSubmitting(false);
@@ -205,7 +226,8 @@ export default function MobilePage() {
       <MobileCollapsibleSection
         title="🌱 Synthèse des récoltes"
         icon="🌱"
-        defaultOpen={false}
+        isOpen={openSection === "synthese"}
+        onToggle={() => handleToggleSection("synthese")}
       >
         <MobilePeriodSelector
           selectedPeriod={selectedPeriode}
@@ -222,7 +244,8 @@ export default function MobilePage() {
       <MobileCollapsibleSection
         title="🧺 Nouvelle récolte"
         icon="🧺"
-        defaultOpen={true}
+        isOpen={openSection === "nouvelle"}
+        onToggle={() => handleToggleSection("nouvelle")}
       >
         <MobileRecolteForm
           cultures={cultures}
@@ -237,4 +260,4 @@ export default function MobilePage() {
       </MobileCollapsibleSection>
     </div>
   );
-} 
+}

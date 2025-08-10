@@ -1,26 +1,22 @@
 "use client";
 
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface MobileCollapsibleSectionProps {
   title: string;
   icon?: string;
   children: React.ReactNode;
-  defaultOpen?: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
   className?: string;
 }
 
-export const MobileCollapsibleSection: React.FC<MobileCollapsibleSectionProps> = ({
-  title,
-  icon,
-  children,
-  defaultOpen = false,
-  className = "",
-}) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+export const MobileCollapsibleSection: React.FC<
+  MobileCollapsibleSectionProps
+> = ({ title, icon, children, isOpen, onToggle, className = "" }) => {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState(0);
+  const [contentHeight, setContentHeight] = React.useState(0);
 
   useLayoutEffect(() => {
     if (contentRef.current) {
@@ -31,14 +27,12 @@ export const MobileCollapsibleSection: React.FC<MobileCollapsibleSectionProps> =
     }
   }, [isOpen, children]);
 
-  const toggleOpen = () => setIsOpen(!isOpen);
-
   return (
     <div className={`rounded-xl border bg-[var(--color-fill)] ${className}`}>
       {/* Header cliquable */}
       <div
         className="flex items-center justify-between p-4 cursor-pointer"
-        onClick={toggleOpen}
+        onClick={onToggle}
       >
         <h2 className="text-lg font-semibold">
           {icon && <span className="mr-2">{icon}</span>}

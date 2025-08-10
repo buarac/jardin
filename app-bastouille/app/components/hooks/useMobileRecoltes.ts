@@ -8,7 +8,9 @@ interface UseMobileRecoltesReturn {
   refresh: () => void;
 }
 
-export function useMobileRecoltes(periode: MobilePeriod): UseMobileRecoltesReturn {
+export function useMobileRecoltes(
+  periode: MobilePeriod
+): UseMobileRecoltesReturn {
   const [recoltes, setRecoltes] = useState<MobileRecolteData[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,16 +18,18 @@ export function useMobileRecoltes(periode: MobilePeriod): UseMobileRecoltesRetur
   const fetchRecoltes = useCallback(async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await fetch(`/api/recoltes/synthese?limit=5&periode=${periode}`);
-      
+      const response = await fetch(
+        `/api/recoltes/synthese?limit=5&periode=${periode}`
+      );
+
       if (!response.ok) {
         throw new Error(`Erreur HTTP: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       const cumuls = data
         .filter((item: any) => item?.culture?.nom && item?.culture?.img)
         .map((item: any) => ({
@@ -33,11 +37,11 @@ export function useMobileRecoltes(periode: MobilePeriod): UseMobileRecoltesRetur
           img: item.culture.img,
           poids: item.poids,
         }));
-      
+
       setRecoltes(cumuls);
     } catch (err) {
-      console.error('Erreur lors de la récupération des récoltes:', err);
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
+      console.error("Erreur lors de la récupération des récoltes:", err);
+      setError(err instanceof Error ? err.message : "Erreur inconnue");
     } finally {
       setLoading(false);
     }
