@@ -6,12 +6,15 @@ import { MobileCollapsibleSection } from "@/components/mobile/MobileCollapsibleS
 import { MobilePeriodSelector } from "@/components/mobile/MobilePeriodSelector";
 import { MobileRecolteTable } from "@/components/mobile/MobileRecolteTable";
 import { MobileRecolteForm } from "@/components/mobile/MobileRecolteForm";
+import { MobileMessageZone } from "@/components/mobile/MobileMessageZone";
 import { useMobileRecoltes } from "@/components/hooks/useMobileRecoltes";
 import { 
   MobileThemeState, 
   MobilePeriod, 
   MobileCultureData, 
-  MobileRecipientData 
+  MobileRecipientData,
+  MobileMessage,
+  MobileRecolteSummary
 } from "@/types/mobile";
 
 export default function MobilePage() {
@@ -34,6 +37,9 @@ export default function MobilePage() {
 
   // État de soumission
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // État des messages
+  const [messages, setMessages] = useState<MobileMessage[]>([]);
 
   // Hook personnalisé pour les récoltes
   const { recoltes, loading, error, refresh } = useMobileRecoltes(selectedPeriode);
@@ -69,6 +75,20 @@ export default function MobilePage() {
       .then((data) => setRecipients(data));
   }, []);
 
+  // Gestion des messages
+  const addMessage = (message: Omit<MobileMessage, "id" | "timestamp">) => {
+    const newMessage: MobileMessage = {
+      ...message,
+      id: Date.now().toString(),
+      timestamp: Date.now()
+    };
+    setMessages(prev => [...prev, newMessage]);
+  };
+
+  const removeMessage = (messageId: string) => {
+    setMessages(prev => prev.filter(m => m.id !== messageId));
+  };
+
   // Gestionnaires d'événements
   const handleThemeChange = (theme: "soleil" | "lavande") => {
     setThemeState(prev => ({ ...prev, theme }));
@@ -94,8 +114,20 @@ export default function MobilePage() {
     const poids = formData.get("poids")?.toString() ?? "";
     const quantite = formData.get("quantite")?.toString() ?? "";
     const recipient = recipients.find((r) => r.id === selectedRecipientId);
+    const culture = cultures.find((c) => c.id === selectedCultureId);
+    
+    if (!culture || !recipient) {
+      addMessage({
+        type: "error",
+        title: "Erreur de validation",
+        content: "Culture ou récipient manquant",
+        autoHide: true
+      });
+      return;
+    }
+
     const poidsBrut = parseFloat(poids);
-    const poidsNet = recipient ? Math.max(0, poidsBrut - recipient.poids) : poidsBrut;
+    const poidsNet = Math.max(0, poidsBrut - recipient.poids);
     const now = new Date();
     now.setHours(11, 0, 0, 0);
 
@@ -111,9 +143,9 @@ export default function MobilePage() {
           id_culture: selectedCultureId,
           date: now.toISOString(),
           poids: poidsNet,
-          quantite: 0,
-          quantite_fiable: false,
-          recipient_id: recipient?.id ?? null,
+          quantite: quantite ? parseInt(quantite) : 0,
+          quantite_fiable: quantite ? true : false,
+          recipient_id: recipient.id,
         }),
       });
 
@@ -122,13 +154,26 @@ export default function MobilePage() {
         throw new Error(error);
       }
 
-      alert("✅ Récolte enregistrée avec succès !");
+      // Message de succès détaillé
+      const successMessage = `🌱 ${culture.nom} : ${(poidsNet / 1000).toFixed(2)} kg${quantite ? ` (${quantite} unités)` : ""} dans ${recipient.nom}`;
+      
+      addMessage({
+        type: "success",
+        title: "✅ Récolte enregistrée !",
+        content: successMessage,
+        autoHide: true
+      });
       
       // Rafraîchir les données
       refresh();
     } catch (err) {
       console.error(err);
-      alert("❌ Erreur lors de l'enregistrement de la récolte.");
+      addMessage({
+        type: "error",
+        title: "❌ Erreur",
+        content: "Erreur lors de l'enregistrement de la récolte",
+        autoHide: true
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -143,6 +188,13 @@ export default function MobilePage() {
         themeState={themeState}
         onThemeChange={handleThemeChange}
         onDarkModeChange={handleDarkModeChange}
+      />
+
+      {/* 📢 Zone Messages */}
+      <MobileMessageZone
+        messages={messages}
+        onRemoveMessage={removeMessage}
+        className="mb-2"
       />
 
       {/* 🌱 Zone Synthèse des récoltes */}
