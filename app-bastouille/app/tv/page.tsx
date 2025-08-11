@@ -18,11 +18,11 @@ export default function TVJobsPage() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-    setLoading(true);
-    setError(null);
+    //setLoading(true);
+    //setError(null);
     
     try {
-      console.log(`🔄 Récupération des données pour la période: ${selectedPeriode}`);
+      //console.log(`🔄 Récupération des données pour la période: ${selectedPeriode}`);
       
       const response = await fetch(`/api/recoltes/synthese?periode=${selectedPeriode}&limit=12`);
       
@@ -57,7 +57,7 @@ export default function TVJobsPage() {
   }, [selectedPeriode]);
 
   useEffect(() => {
-    const interval = setInterval(fetchData, 30000); // Refresh every 30s
+    const interval = setInterval(fetchData, 5000); // Refresh every 30s
     return () => clearInterval(interval);
   }, [selectedPeriode]);
 
@@ -71,7 +71,7 @@ export default function TVJobsPage() {
       <SplashScreen />
       
       {/* Debugger TV */}
-      <TVFocusDebugger />
+      {/* <TVFocusDebugger /> */}
 
       <div className="min-h-screen p-16">
         {/* Navigation des périodes */}
@@ -121,7 +121,7 @@ export default function TVJobsPage() {
 
         {/* Grille des cultures */}
         {recoltesCumulees.length > 0 ? (
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-3 gap-4">
             {recoltesCumulees.map((item, index) => (
               <TVCultureCard
                 key={`${item.nom}-${index}`}
